@@ -22,18 +22,15 @@ var iniciaApp = function(){
 	$("#btnUsuario").on("click",function(){
 		$("#secUsuario").show("slow");
 		$("#secSistema").hide("slow");
-		$("#secPerfil").hide("slow");
-	});
+		$("#secPerfil").hide("slow");});
 	$("#btnSistema").on("click",function(){
 		$("#secUsuario").hide("slow");
 		$("#secSistema").show("slow");
-		$("#secPerfil").hide("slow");
-	});
+		$("#secPerfil").hide("slow");});
 	$("#btnPerfil").on("click",function(){
 		$("#secUsuario").hide("slow");
 		$("#secSistema").hide("slow");
-		$("#secPerfil").show("slow");
-	});
+		$("#secPerfil").show("slow");});
 
 	//Evento para los dropbox
 	$("#comboSistU").change(muestraPerfiles);
@@ -44,13 +41,10 @@ var iniciaApp = function(){
 	//Evento para guardar un Perfil
 	$("#GuardarPerfil").on("click", guardarPerfil);
 
-
-
 	//Evento para agregar un input en la sección de Sistemas para ingresar un nuevo modulo
 	$("#masModulo").on("click",function(e){
 		e.preventDefault();
-	 	$("#modulosDisponibles").append("<input class='form-control form-modulo' type='text' placeholder='Modulo' id='modulo"+(controlModulos++)+"''>");
-	});
+	 	$("#modulosDisponibles").append("<input class='form-control form-modulo' type='text' placeholder='Modulo' id='modulo"+(controlModulos++)+"''>");});
 }
 
 var muestraPerfiles = function(){
@@ -78,7 +72,9 @@ var muestraPerfiles = function(){
 }
 
 var muestraModulos = function(){
-	var index = $(this).val();
+	var index = $(this).val();	//obtenemos el valor del sistema seleccionado
+	if(index == 0)
+		return; //si es 0 quiere decir ue se seleccionó "Selecciona y no hacemos nada."
 	var modulos = $.ajax({
 		method: "GET",
 		url:"api/sistemas",
@@ -129,84 +125,41 @@ var guardarSistema = function(e){
 	}
 	var parametros = "nombre="+nombreSistema+
 					 "&modulos="+modulos;
-	var sistguardado = $.ajax({
-		method: "POST",
-		url: "api/", //aquí va la url donde se guardará el sistema
-		data: parametros,
-		dataType: "json"
-	});
-	sistguardado.done(function(){
-		alert("¡Sistema agregado!");
-	});
-	sistguardado.fail(function(){
-		alert("Error, no se agregó el sistema.");
-	});
+	peticionAjax(parametros,"api/sistemas")
 }
 
 var guardarPerfil = function(e){
 	var nombrePerfil = $("#perfilName").val();
-	//lo esta regresando como un string sin nada, pero si debería de tener algo
 	if(nombrePerfil == ""){
         alert("Agregue un nombre al perfil");
         e.preventDefault();
         return;
     }
-    var modulos ="";
+    //obtenemos los perfiles seleccionados para este usuario.
+ 
+    var modulos = "";
 
+}
+
+var peticionAjax = function(parametros, url){
+	if(confirm("¿Están todos los datos correctos?")){
+		var sistguardado = $.ajax({
+			method: "POST",
+			url: url, //aquí va la url donde se guardará el sistema
+			data: parametros,
+			dataType: "json"
+		});
+		sistguardado.done(function(){
+			alert("¡Sistema agregado!");
+		});
+		sistguardado.fail(function(){
+			alert("Error, no se agregó el sistema.");
+		});
+	}else{e.preventDefault();}
 }
 
 //Este es variable para llevar un conteo de los modulos que se agregan al sistema
 var controlModulos = 0;
 
-//Aquí tenemos que hacer ask por el JSON
-//TODAVIA SE VA USAR?
-var json = 
-	'{'+
-		'"sistemas": {'+
-			'"sis1": {'+
-				'"modulos": "modulo1,modulo2,modulo3,modulo4",'+
-				'"perfiles":{'+
-					'"perfil1": "moulo2,modulo4"'+
-			'}},'+
-	    	'"sis3": {'+
-	      		'"modulos": "modu1,modlu2,modlo3,modul4",'+
-				'"perfiles": {'+
-	        		'"perfil45": "modlu2,modlo3",'+
-	        		'"dff": "modul90,modulo98"'+
-	     '}}}}';
-
-//NUEVA ESTRUCTURA PARA EL ARCHIVO JSON
-//Y ahora como chingados obtengo los sistemas
-var json2= '{'+
- '"usuario": "csancheza@concredito.com.mx",'+
- '"password": "chalino",'+
- '"nombre": "chalino",'+
- '"apellidoP": "sanchez",'+
- '"apellidoM": "armenta",'+
- '"perfiles": ['+
-   '{'+
-     '"nombre": "perfil1",'+
-     '"relacionModulosSistema": ['+
-       '{'+
-         '"nombreSistema": "testing3000",'+
-         '"modulosPermitidos": "rara,raro"'+
-       '},'+
-       '{'+
-         '"nombreSistema": "testing2",'+
-         '"modulosPermitidos": "rara,raro"'+
-       '}'+
-     ']'+
-   '},'+
-   '{'+
-     '"nombre": "perfil2",'+
-     '"relacionModulos": ['+
-       '{'+
-         '"nombreSistema": "testing123123",'+
-         '"modulosPermitidos": "rara,raro"'+
-       '}'+
-     ']'+
-   '}'+
- ']'+
-'}';
 $(document).ready(iniciaApp);
 
