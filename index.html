@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>USMP</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/estilos.css">
+	<script	src="https://code.jquery.com/jquery-3.2.1.min.js"
+			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			crossorigin="anonymous">
+	</script>
+	<script src="js/eventos.js"></script>
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-default">
+			<article class="container-fluid">
+				<div class="navbar-header"><span class="navbar-brand">Sistema de Usuarios.</span></div>
+				<ul class="nav navbar-nav">
+					<div class="btn-group">
+						<button class="btn btn-info" id="btnUsuario">Usuario</button>
+						<button class="btn btn-warning" id="btnSistema">Sistema</button>
+						<button class="btn btn-success" id="btnPerfil">Perfiles</button>
+					</div>
+				</ul>
+			</article>
+		</nav>
+	</header>
+
+	<!-- Seccion de usuario -->
+	<section id="secUsuario" class="panel panel-default">
+		<div class="panel panel-heading">Agrega un usuario.</div>
+		<form id= "formUser" action="" class="panel-body">
+			<label>Usuario:</label> 		 <input type="text" id="userUsuario" placeholder="Usuario"><br>
+			<label>Password:</label> 		 <input type="password" id="userPass" placeholder="Contraseña"><br>
+			<label>Nombre:</label> 		     <input type="text" id="userName" placeholder="Nombre"><br>
+			<label>Apellido Paterno:</label> <input type="text" id="userApePat" placeholder="Apellido Paterno"><br>
+			<label>Apellido Materno:</label> <input type="text" id="userApeMat" placeholder="Apellido Materno"><br>
+			<select name="Sistemas" id="comboSistU">
+			</select><br>
+			<div id="perfilesUser" class="panel panel-info">
+				<div id="perfilesDisp"class="panel panel-heading">Perfiles disponibles</div>
+				<!-- Label e Input de referencia -->
+
+				<article class="panel-info" id="perfilesDispUser">		
+					<!-- Aquí es donde debemos agregar de forma dinámica los perfiles  -->
+				</article>
+			</div>
+			<br><button id="Guardar" class="btn btn-info btn-centro">Guardar</button>
+		<form>
+	</section>
+
+	<!-- Seccion de sistema -->
+	<section id="secSistema" class="panel panel-default">
+		<div class="panel panel-heading">Agrega un sistema.</div>
+		<div id= "formSistema" class="panel-body">
+			<label>Sistema:</label><input type="text" class="form-control" id="systemName" placeholder="Nombre del sistema">  <br>
+			<div id="sistemasCrear"class="panel panel-info">
+				<div class="panel panel-heading">Modulos a integrar en el sistema:</div>
+				<!-- <div class="panel panel-default" id="panelModulos"></div> -->
+				<article class="form" id="modulosDisponibles">		
+					<input class="form-control form-modulo" type="text" placeholder="Modulo">
+				</article>
+				<button class="btn btn-success" id="masModulo" onClick="agregaModulo">+</button>
+			</div>
+			<br><button id="GuardarSistema" class="btn btn-info btn-centro">Guardar</button>
+		<div>
+	</section>
+
+	<!-- Seccion de Perfil -->
+	<section id="secPerfil" class="panel panel-default">
+		<div class="panel panel-heading">Agrega un perfil.</div>
+		<div id= "formUser" class="panel-body">
+			<label>Perfil:</label> <input type="text" id="perfilName" placeholder="Nombre del perfil">  <br>
+			<label>Seleccione el sistema al que pertenecerá este perfil: </label><br>
+			<select name="Sistemas" id="comboSistP">
+			</select>
+			<div id="modulPerfiles" class="panel panel-info">
+				<div class="panel panel-heading">Modulos disponibles</div>
+				<article class="panel-info" id="modulosDispPerf">
+				</article>
+			</div>
+			<br><br><button class="btn btn-info btn-centro" id="GuardarPerfil">Guardar</button>
+		<div>
+	</section>
+
+</body>
+</html>

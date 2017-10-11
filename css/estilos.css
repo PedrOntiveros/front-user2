@@ -1,0 +1,35 @@
+body{
+	font-family: sans-serif;
+	font-size: 16px;
+	max-width: 1024px;
+	margin: auto;
+}
+
+#secSistema, #secUsuario, #secPerfil, #perfilesUser, #modulPerfiles{
+	display: none;
+}
+header nav .btn-group{
+	margin: auto;
+	padding: 10px;
+}
+#sistemasCrear{
+	width: 80%;
+	margin: auto;
+}
+#modulosDisponibles{
+	width: 90%;
+	margin: auto;
+}
+.form-modulo{
+	margin-left: 3em;
+	margin-bottom: 1em;
+	width: 50%;
+}
+#masModulo{
+	float: right;
+	margin-top: -50px;
+	margin-right: 50px;
+}
+.btn-centro{
+	margin-left: 400px;
+}
