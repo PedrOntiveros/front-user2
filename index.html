@@ -31,14 +31,17 @@
 	<!-- Seccion de usuario -->
 	<section id="secUsuario" class="panel panel-default">
 		<div class="panel panel-heading">Agrega un usuario.</div>
-		<form id= "formUser" action="" class="panel-body">
-			<label>Usuario:</label> 		 <input type="text" id="userUsuario" placeholder="Usuario"><br>
-			<label>Password:</label> 		 <input type="password" id="userPass" placeholder="Contraseña"><br>
-			<label>Nombre:</label> 		     <input type="text" id="userName" placeholder="Nombre"><br>
-			<label>Apellido Paterno:</label> <input type="text" id="userApePat" placeholder="Apellido Paterno"><br>
-			<label>Apellido Materno:</label> <input type="text" id="userApeMat" placeholder="Apellido Materno"><br>
-			<select name="Sistemas" id="comboSistU">
+		<form id= "panelFormulario" action="" class="panel-body">
+			<div id="formUser">
+				<label>Usuario:</label> 		 <input class="form-control" type="text" id="userUsuario" placeholder="Usuario"><br>
+				<label>Password:</label> 		 <input class="form-control" type="password" id="userPass" placeholder="Contraseña"><br>
+				<label>Nombre:</label> 		     <input class="form-control" type="text" id="userName" placeholder="Nombre"><br>
+				<label>Apellido Paterno:</label> <input class="form-control" type="text" id="userApePat" placeholder="Apellido Paterno"><br>
+				<label>Apellido Materno:</label> <input class="form-control" type="text" id="userApeMat" placeholder="Apellido Materno"><br>
+			</div>
+			<select name="Sistemas" id="comboSistU" class="dropdown move">
 			</select><br>
+
 			<div id="perfilesUser" class="panel panel-info">
 				<div id="perfilesDisp"class="panel panel-heading">Perfiles disponibles</div>
 				<!-- Label e Input de referencia -->
@@ -72,17 +75,24 @@
 	<section id="secPerfil" class="panel panel-default">
 		<div class="panel panel-heading">Agrega un perfil.</div>
 		<div id= "formUser" class="panel-body">
-			<label>Perfil:</label> <input type="text" id="perfilName" placeholder="Nombre del perfil">  <br>
-			<label>Seleccione el sistema al que pertenecerá este perfil: </label><br>
-			<select name="Sistemas" id="comboSistP">
-			</select>
-			<div id="modulPerfiles" class="panel panel-info">
-				<div class="panel panel-heading">Modulos disponibles</div>
-				<article class="panel-info" id="modulosDispPerf">
-				</article>
+			<label>Perfil:</label> <input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
+
+			<!-- Este es el panel de agregar 1 sistema y sus respectivos modulos -->
+			<div class="panel panel-success" id="panelSistemasPerfil">
+				<div class="panel panel-heading"><label>Seleccione el sistema al que pertenecerá este perfil: </label></div>
+					<select name="Sistemas" id="comboSistP" class="dropdown move">
+					</select>
+					<div id="modulPerfiles" class="panel panel-info">
+						<div class="panel panel-heading">Modulos disponibles</div>
+						<article class="panel-info" id="modulosDispPerf">
+						</article>
+					</div>
+					<br>
 			</div>
-			<br><br><button class="btn btn-info btn-centro" id="GuardarPerfil">Guardar</button>
-		<div>
+			<br>
+			<button class="btn btn-info btn-centro" id="GuardarPerfil">Guardar</button>
+			<button class="btn btn-success" id="masSistema"> + </button>
+		</div>
 	</section>
 
 </body>

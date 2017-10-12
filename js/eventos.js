@@ -17,6 +17,7 @@ var iniciaApp = function(){
 	sistemas.fail(function(){
 		alert("No se cargaron los sistemas disponibles");
 	});
+	old_html = $("#panelSistemasPerfil").html();
 
 	//Botones del Menu
 	$("#btnUsuario").on("click",function(){
@@ -45,12 +46,42 @@ var iniciaApp = function(){
 	$("#masModulo").on("click",function(e){
 		e.preventDefault();
 	 	$("#modulosDisponibles").append("<input class='form-control form-modulo' type='text' placeholder='Modulo' id='modulo"+(controlModulos++)+"''>");});
+
+	$("#masSistema").on("click",agregaSistemaPerfil);
 }
 
 var muestraPerfiles = function(){
-	var ind = $(this).val(); //Aquí estoy consiguiendo el valor del 
-							 //sistema que es al que quiero sacarle los perfiles
-	//console.log(ind);
+	var index = $(this).val();	//obtenemos el valor del sistema seleccionado
+	if(index == 0)
+		return; //si es 0 quiere decir ue se seleccionó "Selecciona" y no hacemos nada.
+	var modulos = $.ajax({
+		method: "GET",
+		url:"api/sistemas",
+		dataType: "json"
+	});
+	modulos.done(function(data){
+		//var numeroModulos = 0;
+		var modulo = "";
+		for(i=0;data.length;i++){
+			if(data[i].nombre != index){
+				continue;
+			}
+			var nombreModulo = data[i].modulos;
+			break;
+		}
+		var moduloSeparated = nombreModulo.split(",");
+		for(i=0;i<moduloSeparated.length;i++){
+			modulo += "<label>"+
+					  "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+moduloSeparated[i]+"'>"+
+					  moduloSeparated[i]+"</label><br>";
+		}
+		
+		$("#modulosDispPerf").html(modulo);
+		$("#modulPerfiles").show("slow");
+	});
+	modulos.fail(function(){
+		alert("No se cargaron los sistemas disponibles");
+	});
 	var chbox = "";
 	var indiceP=0;
 	
@@ -64,7 +95,7 @@ var muestraPerfiles = function(){
 	console.log(ju);
 	for(var key in ju ){	
 		console.log(key)			
-		console.log("here!"+key);															//EL IND HACE RUIDO, NO PUEDO USARLO POR QUE NO ESTA EN LA ESTRUCTURA DEL JSON												
+		console.log("here!"+key);																											
 		chbox += "<label><input type='checkbox' id='cbox"+indiceP+"' value='checkbox"+(indiceP++)+"'>"+key+"</label><br>";
 		//chbox +="<label><input type='checkbox' id='cbox1' value='first_checkbox'> Este es mi primer checkbox</label><br>";
 	}
@@ -74,14 +105,15 @@ var muestraPerfiles = function(){
 var muestraModulos = function(){
 	var index = $(this).val();	//obtenemos el valor del sistema seleccionado
 	if(index == 0)
-		return; //si es 0 quiere decir ue se seleccionó "Selecciona y no hacemos nada."
+		return; //si es 0 quiere decir ue se seleccionó "Selecciona" y no hacemos nada.
+	//validar que el seleccionado no esté en SistemasPerfil, y si está preguntar si quiere editarlo, sino return;
 	var modulos = $.ajax({
 		method: "GET",
 		url:"api/sistemas",
 		dataType: "json"
 	});
 	modulos.done(function(data){
-		var numeroModulos = 0;
+		//var numeroModulos = 0;
 		var modulo = "";
 		for(i=0;data.length;i++){
 			if(data[i].nombre != index){
@@ -93,7 +125,7 @@ var muestraModulos = function(){
 		var moduloSeparated = nombreModulo.split(",");
 		for(i=0;i<moduloSeparated.length;i++){
 			modulo += "<label>"+
-					  "<input type='checkbox' id='checkbox"+(numeroModulos++)+"' value='"+moduloSeparated[i]+"'>"+
+					  "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+moduloSeparated[i]+"'>"+
 					  moduloSeparated[i]+"</label><br>";
 		}
 		
@@ -129,19 +161,62 @@ var guardarSistema = function(e){
 }
 
 var guardarPerfil = function(e){
+	//que el perfil no este vacio
 	var nombrePerfil = $("#perfilName").val();
 	if(nombrePerfil == ""){
         alert("Agregue un nombre al perfil");
         e.preventDefault();
         return;
     }
-    //obtenemos los perfiles seleccionados para este usuario.
- 
-    var modulos = "";
-
+    agregaSistemaPerfil();
+    //obtenemos los perfiles seleccionados para este usuario. 
+    //Tenemos que mandarle el nombre del sistema y los modulos que tendra disponible ese perfil, para el sistema
+    if(SistemasPerfil.length == 0){
+    	//no se ha seleccionado sistema ni modulos
+    	//preguntar si debemos validar si a fuerzas debe seleccionarse al menos 1 modulo
+    	alert("No ha seleccionado nada, ¡Inútil!");
+    	e.preventDefault();
+    	return;
+    }
+    
+    var parametros = "nombre="+nombrePerfil+
+    				 "&sistemas="+SistemasPerfil; //COMO MANDAR UN ARRAY POR AJAX COMO PARAMETRO
+    peticionAjax(parametros,"");  //no sabemos la url
 }
 
-var peticionAjax = function(parametros, url){
+var agregaSistemaPerfil = function(e){
+    //Del sistema que seleccione deben aparecer todos los modulos con los que cuenta, y despues seleccionar los que queremos
+    //que el perfil que estamos creando podra manejar
+    if(confirm("¿Está completa la seleccion de modulos?")){
+	    //ciclo para recorrer los modulos y saber si esta seleccionados
+	    e.preventDefault();
+		var modulosSeleccionados="";
+		for (i=0;i<cantidadChbox; i++){ 
+	    	if(i==(cantidadChbox-1)){
+		    	if($("#checkbox"+i).prop('checked')){
+		    		modulosSeleccionados+=$("#checkbox"+i).val();
+		    	}
+		    	continue;
+		    }	
+		    if($("#checkbox"+i).prop('checked')){
+		    	modulosSeleccionados+=$("#checkbox"+i).val();
+		    	modulosSeleccionados+=",";
+		    }
+		}
+
+		//sacar el value de la etiqueta select para saber que sistema es y mandarla por ajax
+		var nombreSistema = $("#comboSistP").val(); //estamos geteando el nombre del sistema
+		var relacionSistemaModulo = "nombreSistema="+nombreSistema+
+						 			"&modulosPermitidos="+modulosSeleccionados;
+		SistemasPerfil.push(relacionSistemaModulo);
+		$("#panelSistemasPerfil").html(old_html);
+		return;
+    }
+    //validar que la info este correcta
+    e.preventDefault();
+}
+
+var peticionAjax = function(paramectros, url){
 	if(confirm("¿Están todos los datos correctos?")){
 		var sistguardado = $.ajax({
 			method: "POST",
@@ -160,6 +235,9 @@ var peticionAjax = function(parametros, url){
 
 //Este es variable para llevar un conteo de los modulos que se agregan al sistema
 var controlModulos = 0;
+var cantidadChbox = 0;
+var SistemasPerfil = [];
+var old_html;
 
 $(document).ready(iniciaApp);
 

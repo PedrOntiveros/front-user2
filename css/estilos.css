@@ -33,3 +33,15 @@ header nav .btn-group{
 .btn-centro{
 	margin-left: 400px;
 }
+.move{
+	margin-left: 20px;
+}
+#comboSistP{
+	margin-bottom: 20px;
+}
+
+#formUser input{
+	width: 50%;
+	display: inline-block;
+	margin-right: 100px;
+}
