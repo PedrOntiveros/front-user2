@@ -54,28 +54,16 @@ var muestraPerfiles = function(){
 	var index = $(this).val();	//obtenemos el valor del sistema seleccionado
 	if(index == 0)
 		return; //si es 0 quiere decir ue se seleccionó "Selecciona" y no hacemos nada.
-	var modulos = $.ajax({
+	var perfiles = $.ajax({
 		method: "GET",
-		url:"api/sistemas",
+		url:"",
 		dataType: "json"
 	});
 	modulos.done(function(data){
 		//var numeroModulos = 0;
-		var modulo = "";
-		for(i=0;data.length;i++){
-			if(data[i].nombre != index){
-				continue;
-			}
-			var nombreModulo = data[i].modulos;
-			break;
-		}
-		var moduloSeparated = nombreModulo.split(",");
-		for(i=0;i<moduloSeparated.length;i++){
-			modulo += "<label>"+
-					  "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+moduloSeparated[i]+"'>"+
-					  moduloSeparated[i]+"</label><br>";
-		}
 		
+		//hay que ver como obtener los datos del perfil
+
 		$("#modulosDispPerf").html(modulo);
 		$("#modulPerfiles").show("slow");
 	});
