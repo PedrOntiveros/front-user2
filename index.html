@@ -9,7 +9,9 @@
 			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 			crossorigin="anonymous">
 	</script>
+	<script src="js/eventoSistema.js"></script>
 	<script src="js/eventos.js"></script>
+	
 </head>
 
 <body>
@@ -57,43 +59,44 @@
 	<!-- Seccion de sistema -->
 	<section id="secSistema" class="panel panel-default">
 		<div class="panel panel-heading">Agrega un sistema.</div>
-		<div id= "formSistema" class="panel-body">
+		<div class="panel-body">
 			<label>Sistema:</label>
 			<input type="text" class="form-control" id="systemName" placeholder="Nombre del sistema"><br>
-			<div id="sistemasCrear"class="panel panel-info">
-				<div class="panel panel-heading">Modulos a integrar en el sistema:</div>
-				<!-- <div class="panel panel-default" id="panelModulos"></div> -->
-				<article class="form" id="modulosDisponibles">		
-					<input class="form-control form-modulo" type="text" placeholder="Modulo">
-				</article>
-				<button class="btn btn-success" id="masModulo" onClick="agregaModulo">+</button>
+			<div id="contenedor1">
+				<div id="modoulos" class="panel panel-info">
+					<div class="panel panel-heading">Modulos a integrar en el sistema:</div>
+					<article class="form" id="modulosDisponibles">		
+						<input class="form-control form-modulo" type="text" placeholder="Modulo" id="modulo0">
+					</article>
+					<button class="btn btn-success" id="masModulo" onClick="agregaModulo">+</button>
+				</div>
+				<div class="panel panel-info">
+					<div class="panel panel-heading">Perfiles en el sistema.</div>
+					<article>
+						<label>Perfil:</label>
+						<br><label>Modulos:</label>
+					</article>
+				</div>
 			</div>
-		</div>
-		<div class="text-center">
-			<br><a href="#panelAddPerfil" class="btn btn-primary" data-toggle="modal">Agregar Perfil</a>
-			<button id="GuardarSistema" class="btn btn-info" disabled>Guardar</button><br>
+		</div class = "text-center">
+			<br><button id="agregaPerfil" class="btn btn-success">Agregar Perfil</button>
+			<button id="guardarSistema" class="btn btn-info" disabled>Guardar</button><br>
 		</div>
 	</section>
 
-	<div class="modal-fade" id="panelAddPerfil">
-
-	</div>
 	<div id="panelAddPerfil" class="panel panel-info">
-		<div class="panel panel-heading">Agrega un perfil.</div>
+		<div class="panel panel-heading">Agrega un perfil para este sistema.</div>
 		<div id= "formUser" class="panel-body">
 			<label>Perfil:</label> <input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
 			<div class="panel panel-success" id="panelSistemasPerfil">
 				<div class="panel panel-heading">
-					<label>Seleccione el sistema al que pertenecerá este perfil: </label>
+					<label>Seleccione los modulos a los que tendrá acceso el perfil:</label>
 				</div>
-				<div id="modulPerfiles" class="panel panel-info">
-					<div class="panel panel-heading">
-						Modulos disponibles
-					</div>
-					<article class="panel-info" id="modulosDispPerf">
-					</article>
-				</div>
+				<article class="panel-body" id="modulDisponibles">
+					
+				</article>
 			</div>
+			<button id="guardaPS" class="btn btn-success">Guardar perfil.</button>
 		</div>
 	</div>
 

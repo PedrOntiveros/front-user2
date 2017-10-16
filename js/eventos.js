@@ -1,22 +1,7 @@
 var iniciaApp = function(){
 	//Hacer solicitud de los sistemas que hay con sus respectivos modulos, para poder llenar el combo
 	//y los modulos usarlos para la sección de creación de perfiles.
-	var sistemas = $.ajax({
-		method: "GET",
-		url:"api/sistemas",
-		dataType: "json"
-	});
-	sistemas.done(function(data){
-		var option = "<option value='0'>Selecciona</option>";
-		for(i=0;data.length;i++){
-			option += "<option value='"+data[i].nombre+"'>"+data[i].nombre+"</option><br>"
-		}
-		$("#comboSistU").html(option);
-		$("#comboSistP").html(option);
-	});
-	sistemas.fail(function(){
-		alert("No se cargaron los sistemas disponibles");
-	});
+	
 	old_html = $("#panelSistemasPerfil").html();
 
 	//Botones del Menu
@@ -24,10 +9,7 @@ var iniciaApp = function(){
 		$("#secUsuario").show("slow");
 		$("#secSistema").hide("slow");
 		$("#secPerfil").hide("slow");});
-	$("#btnSistema").on("click",function(){
-		$("#secUsuario").hide("slow");
-		$("#secSistema").show("slow");
-		$("#secPerfil").hide("slow");});
+	
 	$("#btnPerfil").on("click",function(){
 		$("#secUsuario").hide("slow");
 		$("#secSistema").hide("slow");
@@ -42,19 +24,7 @@ var iniciaApp = function(){
 	//Evento para guardar un Perfil
 	$("#GuardarPerfil").on("click", guardarPerfil);
 
-	//Evento para agregar un input en la sección de Sistemas para ingresar un nuevo modulo
-	$("#masModulo").on("click",function(e){
-		e.preventDefault();
-		 $("#modulosDisponibles").append("<input class='form-control form-modulo' type='text' placeholder='Modulo' id='modulo"+(controlModulos++)+"''>");
-	});
-
-	$("#agregaPerfil").on("click",agregaPerfil);
 	$("#masSistema").on("click",agregaSistemaPerfil);
-}
-
-var agregaPerfil = function(e){
-	e.preventDefault();
-	$("#panelAddPerfil").show("fast");
 }
 
 var muestraPerfiles = function(){
@@ -229,7 +199,7 @@ var peticionAjax = function(paramectros, url){
 }
 
 //Este es variable para llevar un conteo de los modulos que se agregan al sistema
-var controlModulos = 0;
+
 var cantidadChbox = 0;
 var SistemasPerfil = [];
 var old_html;
