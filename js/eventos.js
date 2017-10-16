@@ -45,9 +45,16 @@ var iniciaApp = function(){
 	//Evento para agregar un input en la sección de Sistemas para ingresar un nuevo modulo
 	$("#masModulo").on("click",function(e){
 		e.preventDefault();
-	 	$("#modulosDisponibles").append("<input class='form-control form-modulo' type='text' placeholder='Modulo' id='modulo"+(controlModulos++)+"''>");});
+		 $("#modulosDisponibles").append("<input class='form-control form-modulo' type='text' placeholder='Modulo' id='modulo"+(controlModulos++)+"''>");
+	});
 
+	$("#agregaPerfil").on("click",agregaPerfil);
 	$("#masSistema").on("click",agregaSistemaPerfil);
+}
+
+var agregaPerfil = function(e){
+	e.preventDefault();
+	$("#panelAddPerfil").show("fast");
 }
 
 var muestraPerfiles = function(){
