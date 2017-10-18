@@ -4,8 +4,7 @@ body{
 	max-width: 1024px;
 	margin: auto;
 }
-
-#secSistema, #secUsuario, #secPerfil, #perfilesUser, #modulPerfiles, #panelAddPerfil{
+#secSistema, #secUsuario, #panelAddPerfil, #secPerfil, #perfilesUser, #modulPerfiles, #addPerfil,#modPerfil,#infoPerfil,#addBotones{
 	display: none;
 }
 header nav .btn-group{
@@ -31,7 +30,7 @@ header nav .btn-group{
 	margin-right: 50px;
 }
 .btn-centro{
-	margin: auto;
+	margin-left: 400px;
 }
 .move{
 	margin-left: 20px;
@@ -39,7 +38,6 @@ header nav .btn-group{
 #comboSistP{
 	margin-bottom: 20px;
 }
-
 #formUser input{
 	width: 50%;
 	display: inline-block;

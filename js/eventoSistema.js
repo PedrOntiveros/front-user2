@@ -2,32 +2,45 @@ var inicia = function(){
     $("#btnSistema").on("click",cargaPaginaSistema);
     $("#masModulo").on("click",agregaModulo);
     $("#agregaPerfil").on("click",muestraFormPerfil);
-    $("#guardarPerfil").on("click",guardarPerfil)
+    $("#regresaSistema").on("click",regresaSistema);
+    $("#guardarPerfil").on("click",guardarPerfil);
 }
 
 var guardarSistema = function(){
 
 }
 
-var muestraFormPerfil = function(){
-    //Aquí tenía un e.preventDefault();
-    var modulosDisp = obtenModulos();
-    if(0 == modulosDisp.length){ //
-        alert("Agrege al menos un modulo.")
+var regresaSistema = function(e){
+    e.preventDefault();
+    $("#secSistema").slideDown("slow");
+    $("#panelAddPerfil").slideToggle("slow");
+}
+
+var muestraFormPerfil = function(e){
+    e.preventDefault();
+    if(!confirm("¿Seguro que desea continuar?")){
+        return;
     }else{
-        insertaModulos(modulosDisp);
-        $("#panelAddPerfil").show("fast");
+        var modulosDisp = obtenModulos();
+        if(0 == modulosDisp.length){
+            alert("Agrege al menos un modulo.")
+        }else{
+            insertaModulos(modulosDisp);
+            $("#secSistema").slideUp("slow",)
+            $("#panelAddPerfil").show("slow");
+        }
     }
 }
 
 var insertaModulos = function(modulDisponibles){
-    modulDisponibles.array.forEach(function(element) {
-        
-    }, this);
-    modulo += "<label>"+
-            "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+moduloSeparated[i]+"'>"+
-    moduloSeparated[i]+"</label><br>";
-    $("#modulDisponibles").append("");
+    var modulo ="";
+    for(i=0;i<controlModulos;i++){
+        modulo += "<label class='panel panel-default'>"+
+        "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+modulDisponibles[i]+"'>"+
+        modulDisponibles[i]+"</label>";
+   }
+    
+    $("#modulDisponibles").html(modulo);
 }
 
 var obtenModulos = function(){
@@ -44,33 +57,18 @@ var obtenModulos = function(){
     return arrayModulo; 
 }
 
-var agregaModulo = function(){
+var agregaModulo = function(e){
+    e.preventDefault();
     $("#modulosDisponibles").append("<input class='form-control form-modulo' type='text' placeholder='Modulo' id='modulo"+(controlModulos++)+"''>");
 }
 
 var cargaPaginaSistema = function(){
-    var sistemas = $.ajax({
-        method: "GET",
-        url:"api/sistemas",
-        dataType: "json"
-    });
-    sistemas.done(function(data){
-        var option = "<option value='0'>Selecciona</option>";
-        for(i=0;data.length;i++){
-            option += "<option value='"+data[i].nombre+"'>"+data[i].nombre+"</option><br>"
-        }
-        $("#comboSistU").html(option);
-        $("#comboSistP").html(option);
-    });
-    sistemas.fail(function(){
-        alert("No se cargaron los sistemas disponibles");
-    });
     $("#secUsuario").hide("slow");
     $("#secPerfil").hide("slow");
     $("#secSistema").show("slow");
 }
 
-
+var cantidadChbox = 0;
 var controlModulos = 1;
 var controlPerifles = 0;
 $(document).ready(inicia);

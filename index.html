@@ -10,6 +10,7 @@
 			crossorigin="anonymous">
 	</script>
 	<script src="js/eventoSistema.js"></script>
+	<script src="js/eventoPerfil.js"></script>
 	<script src="js/eventos.js"></script>
 	
 </head>
@@ -70,15 +71,9 @@
 					</article>
 					<button class="btn btn-success" id="masModulo" onClick="agregaModulo">+</button>
 				</div>
-				<div class="panel panel-info">
-					<div class="panel panel-heading">Perfiles en el sistema.</div>
-					<article>
-						<label>Perfil:</label>
-						<br><label>Modulos:</label>
-					</article>
-				</div>
 			</div>
-		</div class = "text-center">
+		</div>
+		<div class="text-center">
 			<br><button id="agregaPerfil" class="btn btn-success">Agregar Perfil</button>
 			<button id="guardarSistema" class="btn btn-info" disabled>Guardar</button><br>
 		</div>
@@ -93,34 +88,55 @@
 					<label>Seleccione los modulos a los que tendrá acceso el perfil:</label>
 				</div>
 				<article class="panel-body" id="modulDisponibles">
-					
 				</article>
 			</div>
-			<button id="guardaPS" class="btn btn-success">Guardar perfil.</button>
+			<div class="text-center">
+				<button id="regresaSistema" class="btn btn-warning">Regresar</button>
+				<button id="guardaPS" class="btn btn-success">Guardar perfil</button>
+			</div>
 		</div>
 	</div>
 
 	<!-- Seccion de Perfil -->
 	<section id="secPerfil" class="panel panel-default">
-		<div class="panel panel-heading">Agrega un perfil.</div>
-		<div id= "formUser" class="panel-body">
-			<label>Perfil:</label> <input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
-
-			<!-- Este es el panel de agregar 1 sistema y sus respectivos modulos -->
-			<div class="panel panel-success" id="panelSistemasPerfil">
-				<div class="panel panel-heading"><label>Seleccione el sistema al que pertenecerá este perfil: </label></div>
-					<select name="Sistemas" id="comboSistP" class="dropdown move">
-					</select>
+		<label> Seleccione un Sistema:</label>
+		<select name="Sistemas" id="comboSistP" class="dropdown move">
+		<!-- RECUERDA QUITAR ESTOS OPTION, SON SOLO PARA PRUEBAS -->
+			<option value='2'>Selecciona</option>
+			<option value='1'>Algo</option>
+		</select><br>
+		<div class="panel panel-heading" id="addBotones">
+			<button class="btn btn-info btn-centro" id="btnNuevoPerfil">Nuevo</button>
+			<button class="btn btn-warning " id="btnModificarPerfil">Modificar +</button>
+		</div>
+		<div class="panel panel-heading" id="addPerfil">
+			<div class="panel panel-heading">Agrega un nuevo un perfil.</div>
+			<div id= "formUser" class="panel-body">
+				<label>Perfil:</label>
+				<input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
+				<div class="panel panel-success" id="panelSistemasPerfil">
+				<!-- <div class="panel panel-heading"><label>Seleccione el sistema al que pertenecerá este perfil: </label></div> -->
 					<div id="modulPerfiles" class="panel panel-info">
 						<div class="panel panel-heading">Modulos disponibles</div>
 						<article class="panel-info" id="modulosDispPerf">
 						</article>
-					</div>
-					<br>
+					</div><br>
+				</div><br>
+				<button class="btn btn-info btn-centro" id="GuardarPerfil">Guardar</button>
+				<button class="btn btn-success" id="masPerfil"> + </button>
 			</div>
-			<br>
-			<button class="btn btn-info btn-centro" id="GuardarPerfil">Guardar</button>
-			<button class="btn btn-success" id="masSistema"> + </button>
+		</div>
+		<div class="panel panel-heading" id="modPerfil">
+			<div class="panel panel-heading">Modifica un Perfil.</div>	
+			<div id= "formUser2" class="panel-body">
+				<label>Perfil:</label>
+				<input type="text" id="newPerfilName" placeholder="Nuevo nombre"><br><br>
+				<!-- ESTOY SACANDO ESTE ID  (EL DE ABAJO) -->
+				<div class="panel panel-success" id="panelSistemasPerfil2">  
+					<!-- <div class="panel panel-heading"><label>Seleccione el sistema al cual quiere modificar el perfil: </label></div> -->	
+				</div><br>
+				<button class="btn btn-info btn-centro" id="guardarCambiosPer">Aceptar</button>
+			</div>
 		</div>
 	</section>
 
