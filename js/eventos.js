@@ -1,71 +1,16 @@
 var iniciaApp = function(){
 	//Hacer solicitud de los sistemas que hay con sus respectivos modulos, para poder llenar el combo
 	//y los modulos usarlos para la sección de creación de perfiles.
-	
-	old_html = $("#panelSistemasPerfil").html();
-
 	//Botones del Menu
+
 	$("#btnUsuario").on("click",function(){
 		$("#secUsuario").show("slow");
 		$("#secSistema").hide("slow");
 		$("#secPerfil").hide("slow");});
 	
-	$("#btnPerfil").on("click",function(){
-		$("#secUsuario").hide("slow");
-		$("#secSistema").hide("slow");
-		$("#secPerfil").show("slow");});
-
 	//Evento para los dropbox
-	$("#comboSistU").change(muestraPerfiles);
-	$("#comboSistP").change(muestraModulos);
-
-	//Evento para guardar un Sistema
-	$("#GuardarSistema").on("click", guardarSistema);
-	//Evento para guardar un Perfil
-	$("#GuardarPerfil").on("click", guardarPerfil);
-
-	$("#masSistema").on("click",agregaSistemaPerfil);
 }
 
-var muestraPerfiles = function(){
-	var index = $(this).val();	//obtenemos el valor del sistema seleccionado
-	if(index == 0)
-		return; //si es 0 quiere decir ue se seleccionó "Selecciona" y no hacemos nada.
-	var perfiles = $.ajax({
-		method: "GET",
-		url:"",
-		dataType: "json"
-	});
-	modulos.done(function(data){
-		//var numeroModulos = 0;
-		
-		//hay que ver como obtener los datos del perfil
-
-		$("#modulosDispPerf").html(modulo);
-		$("#modulPerfiles").show("slow");
-	});
-	modulos.fail(function(){
-		alert("No se cargaron los sistemas disponibles");
-	});
-	var chbox = "";
-	var indiceP=0;
-	
-	$("#perfilesUser").show("slow");		
-	
-	//console.log(JsonSistema.sistemas.sis1.perfiles); // asi me imprime hasta los perfiles:{mod1,mod2}
-	chbox += "<label><input type='checkbox' id='cbox' value='checkbox'>"+ind+"</label><br>";
-
-	var ju = JsonSistema.sistemas.ind.perfiles;
-
-	console.log(ju);
-	for(var key in ju ){	
-		console.log(key)			
-		console.log("here!"+key);																											
-		chbox += "<label><input type='checkbox' id='cbox"+indiceP+"' value='checkbox"+(indiceP++)+"'>"+key+"</label><br>";
-		//chbox +="<label><input type='checkbox' id='cbox1' value='first_checkbox'> Este es mi primer checkbox</label><br>";
-	}
-	$("#perfilesDispUser").html(chbox);
-}
 
 var muestraModulos = function(){
 	var index = $(this).val();	//obtenemos el valor del sistema seleccionado

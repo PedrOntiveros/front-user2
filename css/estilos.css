@@ -4,7 +4,7 @@ body{
 	max-width: 1024px;
 	margin: auto;
 }
-#secSistema, #secUsuario, #panelAddPerfil, #secPerfil, #perfilesUser, #modulPerfiles, #addPerfil,#modPerfil,#infoPerfil,#addBotones{
+#modulPorPerfiles, #addBotones, #secSistema, #secUsuario, #panelAddPerfil, #secPerfil, #perfilesUser, #modulPerfiles, #addPerfil, #modPerfil, #infoPerfil,#addBotones{
 	display: none;
 }
 header nav .btn-group{
@@ -22,15 +22,12 @@ header nav .btn-group{
 .form-modulo{
 	margin-left: 3em;
 	margin-bottom: 1em;
-	width: 50%;
+	width: 70%;
 }
 #masModulo{
 	float: right;
 	margin-top: -50px;
 	margin-right: 50px;
-}
-.btn-centro{
-	margin-left: 400px;
 }
 .move{
 	margin-left: 20px;
@@ -42,4 +39,14 @@ header nav .btn-group{
 	width: 50%;
 	display: inline-block;
 	margin-right: 100px;
+}
+#modoulos{
+	width: 60%;
+}
+#perfilesDispSistema{
+	width: 38%;
+}
+#perfilesDispSistema{
+	float: right;
+	margin-top: -133px;
 }
