@@ -57,7 +57,6 @@ var iniciaApp = function(){
 	});
 
 	$("#comboSistU").change(muestraPerfiles);
-	$("#boton").on("click",muestraModuloPorPerfil);
 	
 	$("#comboSistP").change(muestraBotones);
 	$("#GuardarPerfil").on("click", guardarPerfil);
@@ -73,7 +72,6 @@ var modificarPerfil = function(){
 	//aquí solo voy a actualizar la información
 }
 var muestraPerfiles = function(){
-
 	var sistema = $("#comboSistP").val();	//obtenemos el valor del sistema seleccionado OCUPO CHECAR BIEN ESTO
 
 	if(null == sistema){
@@ -99,10 +97,9 @@ var muestraPerfiles = function(){
 			};
 			nombrePerfiles.push(data[i].nombre);
 		}
-
 		var perfiles="";
 		for(i=0;i<nombrePerfiles.length;i++){
-			perfiles+= "<input type='button' id='boton' onclick='muestraModuloPorPerfil()' value='"+nombrePerfiles[i]+"'>";		
+			perfiles+= "<input type='button' id='boton"+i+"' onclick='muestraModuloPorPerfil(boton"+i+"	)' value='"+nombrePerfiles[i]+"'>";		
 		}
 		$("#panelSistemasPerfil2").html(perfiles);
 
@@ -120,14 +117,17 @@ var muestraPerfiles = function(){
 	});
 }
 
-var muestraModuloPorPerfil = function(){
-
+var muestraModuloPorPerfil = function(boton){
 	//te mando el sistema y me regresa todos los perfiles que tiene ese sistema y por ende estan ahi todos los modulos
 	//DEBO MANDARLE EL ID UNICO DEL SISTEMA
-	var Perfil = $("#boton").val();
+	console.log("dfsdgasdf");
+	var Perfil = $(boton).val();
 	var sistema = $("#comboSistP").val();
 
+	console.log(Perfil);
+
 	$("#newPerfilName").val(Perfil);
+	//alert("ESTOY ENTRANDO AL MODULOPORPERFIL");
 
 	var modulos = $.ajax({
 		method: "GET",
@@ -333,7 +333,7 @@ var peticionAjax = function(paramectros, url){
 //Este es variable para llevar un conteo de los modulos que se agregan al sistema
 var controlModulos = 0;
 var cantidadChbox = 0;
-var cantidadChboxPorPerfil = 0;
+var cantidadChboxPorPerfil =0;
 var SistemasPerfil = [];
 var old_html;
 

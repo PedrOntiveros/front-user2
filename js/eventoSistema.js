@@ -10,8 +10,8 @@ var inicia = function(){
 var muestraPerfilGuardado = function(){
     var htmlPerfil = "";
     for(i=0; i<PerfilesCreados.length;i++){
-        // <div class="panel panel-info ">
-        // <b>Perfil: </b>Aquí va el nombre del perfil <br>
+        htmlPerfil = "<div class='panel panel-info'>"+
+                     "<b>Perfil: </b>"+PerfilesCreados.pop+"<br>"+
         // <b>Modulos: </b>Aquí van los modulos <br>
         // <button class="btn btn-primary btn-xs">Modifica</button>	
         //</div>
