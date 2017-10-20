@@ -5,19 +5,41 @@ var inicia = function(){
     $("#regresaSistema").on("click",regresaSistema);
     $("#guardaPS").on("click",guardarPerfil);
 }
+
+//Ejecutada desde la dunción modifica perfil
+//
+var muestraModPerfil = function(){
+
+}
+
+//Ejecutado al hacer click en algún modificar
+//Deberá mostrar la página de agrega Perfil pero con los datos de ese perfil
+var modificaPerfil = function(idPerfil){
+    nombrePerfil = PerfilesCreados[idPerfil][0];
+    modulosPerfil= PerfilesCreados[idPerfil][1];
+    if(!confirm("¿Desea modificar el perfil ")){
+        return;
+    }
+    muestraModPerfil();
+    console.log("Nombre: "+nombrePerfil);
+    console.log("Modulos: "+modulosPerfil);
+}
+
 //Ejecuta desde la función guardarPerfil
 //Mostrará los datos del perfil que se guardó en la sección
 var muestraPerfilGuardado = function(){
     var htmlPerfil = "";
     for(i=0; i<PerfilesCreados.length;i++){
-        htmlPerfil = "<div class='panel panel-info'>"+
-                     "<b>Perfil: </b>"+PerfilesCreados.pop+"<br>"+
-        // <b>Modulos: </b>Aquí van los modulos <br>
-        // <button class="btn btn-primary btn-xs">Modifica</button>	
-        //</div>
-        //hacer el desmadre para que se creen los perfiles que ya he guardado.
-   
+        var perfili = PerfilesCreados[i].slice();
+        var modPerfil = perfili.pop();
+        var nomPerfil = perfili.pop();
+        htmlPerfil += "<div class='panel panel-info'>"+
+                     "<b>Perfil: </b>"+nomPerfil+"<br>"+
+                     "<b>Modulos: </b>"+modPerfil+"<br>"+
+                     "<button class='btn btn-primary btn-xs' onclick=modificaPerfil("+i+")>Modifica</button>"+
+                     "</div>"
     }
+    $("#perfilesCreados").html(htmlPerfil);
     $("#secSistema").show("slow");  
 }
 
@@ -133,6 +155,7 @@ var cargaPaginaSistema = function(){
     $("#panelAddPerfil").hide("slow");
 }
 
+var modifica = false;
 var PerfilesCreados = [];
 var cantidadChbox = 0;
 var controlModulos = 0;

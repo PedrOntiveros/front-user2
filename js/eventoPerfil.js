@@ -158,7 +158,6 @@ var muestraModuloPorPerfil = function(boton){
 					  "<input type='checkbox' id='checkbox"+(cantidadChboxPorPerfil++)+"' value='"+moduloSeparated[i]+"'>"+
 					  moduloSeparated[i]+"</label></div>";
 		}
-		console.log(modulo);
 
 		//CON EL PERFIL QUE TRAES, DEBES SACAR SUS MODULOS Y HACER LOS CHECKS
 

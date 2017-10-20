@@ -61,18 +61,18 @@
 		<div class="panel-body">
 			<label>Sistema:</label>
 			<input type="text" class="form-control" id="systemName" placeholder="Nombre del sistema"><br>
-			<div>
-				<div id="modoulos" class="panel panel-info">
+			<div id="perfilesDispSistema" class="panel panel-info">
+				<div class="panel panel-heading">Perfiles:</div>
+					<div id="perfilesCreados">
+					</div>
+			</div>
+			<div class="modoulus">
+				<div class="panel panel-info modoulos">
 					<div class="panel panel-heading">Modulos a integrar en el sistema:</div>
 					<article class="form" id="modulosDisponibles">		
 						<input class="form-control form-modulo" type="text" placeholder="Modulo" id="modulo0">
 					</article>
 					<button class="btn btn-success" id="masModulo" onClick="agregaModulo">+</button>
-				</div>
-				<div id="perfilesDispSistema" class="panel panel-info">
-					<div class="panel panel-heading">Perfiles:</div>
-						<div id="perfilesCreados">
-						</div>
 				</div>
 			</div>
 		</div>
