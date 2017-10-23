@@ -4,12 +4,23 @@ var inicia = function(){
     $("#agregaPerfil").on("click",muestraFormPerfil);
     $("#regresaSistema").on("click",regresaSistema);
     $("#guardaPS").on("click",guardarPerfil);
+    $("#guardarSistema").on("click",guardaSistema);
 }
 
-//Ejecutada desde la dunción modifica perfil
-//
-var muestraModPerfil = function(){
-
+//la mas importante
+//Aquí vamos a mandar toda la wea esa por ajax al endpoint
+var guardaSistema = function(){
+    if(!confirm("¿Desea guardar el sistema?")){
+        return;
+    }
+    var nombre = $("#systemName").val();
+    var modulos = obtenModulos().toString();
+    var perfiles = "Perfiles {\n";
+    for(let perfil of PerfilesCreados){
+        perfiles +="\nNombre: "+perfil[0]+
+                   "\nmodulos: "+perfil[1];
+    }
+    alert("Sistema: "+nombre+"\nModulos: "+modulos+"\nPerfiles: "+perfiles);
 }
 
 //Ejecutado al hacer click en algún modificar
@@ -17,12 +28,24 @@ var muestraModPerfil = function(){
 var modificaPerfil = function(idPerfil){
     nombrePerfil = PerfilesCreados[idPerfil][0];
     modulosPerfil= PerfilesCreados[idPerfil][1];
-    if(!confirm("¿Desea modificar el perfil ")){
+    if(!confirm("¿Desea modificar el perfil?")){
         return;
     }
-    muestraModPerfil();
-    console.log("Nombre: "+nombrePerfil);
-    console.log("Modulos: "+modulosPerfil);
+    $("#SistemaPerfilName").val(nombrePerfil);
+    var checkbox ="";
+    var modulo = "";
+    for(i=0;i<=controlModulos;i++){
+        checkbox = "#checkbox"+i;
+        modulo = $(checkbox).val();  //Aquí hay un pedo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        console.log(modulo);         //Esta wea la imprime como Undefined
+        if(modulosPerfil.includes(modulo)){
+            $(checkbox).prop('checked', true);
+        }else{
+            $(checkbox).prop('checked', false);
+        }
+    }
+    $("#secSistema").slideUp("slow",)
+    $("#panelAddPerfil").show("slow");
 }
 
 //Ejecuta desde la función guardarPerfil
@@ -40,7 +63,8 @@ var muestraPerfilGuardado = function(){
                      "</div>"
     }
     $("#perfilesCreados").html(htmlPerfil);
-    $("#secSistema").show("slow");  
+    $("#secSistema").show("slow"); 
+    $("#guardarSistema").prop("disabled", false); 
 }
 
 //Ejecutada al hacer clic en Guardar Perfil
@@ -51,6 +75,10 @@ var guardarPerfil = function(e){
         return;
     }
     var nombrePerfil = $("#SistemaPerfilName").val();
+    if(""==nombrePerfil){
+        alert("El perfil debe tener nombre");
+        return;
+    }
     var moduloSeleccionados = []
     var perfilCreado = [];
     for(i=0;i<cantidadChbox;i++){
@@ -64,7 +92,7 @@ var guardarPerfil = function(e){
         return;
     }
     perfilCreado.push(nombrePerfil);
-    perfilCreado.push(moduloSeleccionados.toString());
+    perfilCreado.push(moduloSeleccionados);
     PerfilesCreados.push(perfilCreado);
     $("#panelAddPerfil").hide("slow");
     muestraPerfilGuardado();
@@ -101,6 +129,7 @@ var muestraFormPerfil = function(e){
             return;
         }else{
             insertaModulos(modulosDisp);
+            $("#SistemaPerfilName").val("");
             $("#headingPerfil").append(nombreSistema);
             $("#secSistema").slideUp("slow",)
             $("#panelAddPerfil").show("slow");
@@ -113,8 +142,8 @@ var muestraFormPerfil = function(e){
 var insertaModulos = function(modulDisponibles){
     var modulo ="";
     for(i=0;i<modulDisponibles.length;i++){
-        modulo += "<div class='checkbox''><label>"+
-        "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+modulDisponibles[i]+"'>"+
+        modulo += "<div class='checkbox''>"+
+        "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+modulDisponibles[i]+"'><label>"+
         modulDisponibles[i]+"</label></div>";
    }
     $("#modulDisponibles").html(modulo);

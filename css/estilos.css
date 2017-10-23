@@ -45,6 +45,9 @@ header nav .btn-group{
 }
 #perfilesDispSistema{
 	width: 38%;
-	position: absolute;
-	margin-left: 500px;
+	float: right;
+}
+#divPerfil{
+
+	width: 90%;
 }
