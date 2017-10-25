@@ -5,6 +5,12 @@ var inicia = function(){
     $("#regresaSistema").on("click",regresaSistema);
     $("#guardaPS").on("click",guardarPerfil);
     $("#guardarSistema").on("click",guardaSistema);
+    $("#PerfilABuscar").on("keyup",buscaPerfil);
+}
+
+var buscaPerfil = function(){
+    var likePerfil = $("#PerfilABuscar").val();
+    var perfilAChecarPerfilesCreados
 }
 
 //la mas importante
@@ -68,11 +74,11 @@ var muestraPerfilGuardado = function(){
                      "<b>Perfil: </b>"+nomPerfil+"<br>"+
                      "<b>Modulos: </b>"+modPerfil+"<br>"+
                      "<button class='btn btn-primary btn-xs' onclick=modificaPerfil("+i+")>Modifica</button>"+
-                     "</div>"
+                     "</div>";
     }
     $("#perfilesCreados").html(htmlPerfil);
-    $("#secSistema").show("slow"); 
-    $("#guardarSistema").prop("disabled", false); 
+    $("#secSistema").show("slow");
+    $("#guardarSistema").prop("disabled", false);
 }
 
 //Ejecutada al hacer clic en Guardar Perfil
@@ -159,9 +165,16 @@ var insertaModulos = function(modulDisponibles){
     var modulo ="";
     cantidadChbox = 0;
     for(i=0;i<modulDisponibles.length;i++){
-        modulo += "<div class='checkbox''>"+
-        "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+modulDisponibles[i]+"'><label>"+
-        modulDisponibles[i]+"</label></div>";
+        modulo +=   "<div class='col-lg-6'>"+
+                    "<div class='input-group'>"+
+                    "<span class='input-group-addon'>"+
+                    "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+modulDisponibles[i]+"'>"+
+                    "</span>"+
+                    "<label class='form-control' aria-label=''>"+modulDisponibles[i]+"</label>"+
+                    "</div></div>";
+        // modulo += "<div class='checkbox''>"+
+        // "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+modulDisponibles[i]+"'><label>"+
+        // modulDisponibles[i]+"</label></div>";
    }
     $("#modulDisponibles").html(modulo);
 }
@@ -188,8 +201,12 @@ var agregaModulo = function(e){
     e.preventDefault();
     controlModulos++;
     $("#modulosDisponibles").append(
-        "<input class='form-control form-modulo' type='text' placeholder='Modulo' id='modulo"+
-        controlModulos+"'>");
+        "<div class='col-lg-6'>"+
+        "<div class='input-group'>"+
+            "<span class='input-group-btn'>"+
+                "<button class='btn btn-danger' type='button' id='btnEliminaModulo'>-</button>"+
+            "</span><input type='text' class='form-control' id='modulo"+controlModulos+
+            "' placeholder='Modulo'></div></div>");
 }
 
 //Ejecutada al hacer clic en Sistema, en la barra de nav

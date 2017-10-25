@@ -62,15 +62,24 @@
 			<label>Sistema:</label>
 			<input type="text" class="form-control" id="systemName" placeholder="Nombre del sistema"><br>
 			<div id="perfilesDispSistema" class="panel panel-info">
-				<div class="panel panel-heading">Perfiles:</div>
-					<div id="perfilesCreados">
+				<div class="panel panel-heading">Perfiles:
+					<input type="text" name="perfilABuscar" id="PerfilABuscar" placeholder="Buscar">
+				</div>
+					<div id="perfilesCreados" style="height: 260px; overflow-y: scroll;">
 					</div>
 			</div>
 			<div id="divAddModulos"class="modoulus">
 				<div class="panel panel-info modoulos">
 					<div class="panel panel-heading">Modulos a integrar en el sistema:</div>
-					<article class="form" id="modulosDisponibles">		
-						<input class="form-control form-modulo" type="text" placeholder="Modulo" id="modulo0">
+					<article class="form" id="modulosDisponibles" style="height: 260px; overflow-y: scroll;">		
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-danger" type="button" id="btnEliminaModulo">-</button>
+								</span>
+								<input type="text" class="form-control" id="modulo0" placeholder="Modulo">
+							</div>
+						</div>
 					</article>
 					<button class="btn btn-success" id="masModulo" onClick="agregaModulo">+</button>
 				</div>
@@ -85,11 +94,11 @@
 		<div id="headingPerfil" class="panel panel-heading"></div>
 		<div id= "formUser" class="panel-body">
 			<label>Perfil:</label> <input type="text" id="SistemaPerfilName" placeholder="Nombre del perfil"><br><br>
-			<div class="panel panel-success" id="panelSistemasPerfil">
-				<div class="panel panel-heading">
+			<div class="panel panel-" id="panelSistemasPerfil">
+				<div class="panel panesuccessl-heading">
 					<label>Seleccione los modulos a los que tendrá acceso el perfil:</label>
 				</div>
-				<article class="panel-body" id="modulDisponibles">
+				<article class="panel-body row" id="modulDisponibles">
 				</article>
 			</div>
 			<div class="text-center">
