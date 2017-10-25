@@ -81,9 +81,8 @@
 			<button id="guardarSistema" class="btn btn-info" disabled>Guardar</button><br>
 		</div>
 	</section>
-
 	<div id="panelAddPerfil" class="panel panel-info">
-		<div id="headingPerfil" class="panel panel-heading">Agrega un perfil para: </div>
+		<div id="headingPerfil" class="panel panel-heading"></div>
 		<div id= "formUser" class="panel-body">
 			<label>Perfil:</label> <input type="text" id="SistemaPerfilName" placeholder="Nombre del perfil"><br><br>
 			<div class="panel panel-success" id="panelSistemasPerfil">
@@ -99,51 +98,53 @@
 			</div>
 		</div>
 	</div>
+	<!-- ENDOF Seccion de sistema -->
 
 	<!-- Seccion de Perfil -->
 	<section id="secPerfil" class="panel panel-default">
 		<label> Seleccione un Sistema:</label>
-		<select name="Sistemas" id="comboSistP" class="dropdown move">
-			<!-- RECUERDA QUITAR ESTOS OPTION, SON SOLO PARA PRUEBAS -->
+		<select name="Sistemas" id="comboSistP" class="dropdown move" >
 		</select><br>
 		<div class="panel panel-heading" id="addBotones">
 			<button class="btn btn-info btn-centro" id="btnNuevoPerfil">Nuevo</button>
 			<button class="btn btn-warning " id="btnModificarPerfil">Modificar +</button>
 		</div>		
+
 		<div class="panel panel-heading" id="addPerfil">
 			<div class="panel panel-heading">Agrega un nuevo un perfil.</div>
 			<div id= "formUser" class="panel-body">
 				<label>Perfil:</label>
 				<input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
 				<div class="panel panel-success" id="panelSistemasPerfil">
-					<!-- <div class="panel panel-heading"><label>Seleccione el sistema al que pertenecerá este perfil: </label></div> -->
 					<div id="modulPerfiles" class="panel panel-info">
 						<div class="panel panel-heading">Modulos disponibles</div>
-						<article class="panel-info" id="modulosDispPerf">
-						</article>
+						<article class="panel-info" id="modulosDispPerf"></article>
 					</div><br>
 				</div><br>
 				<button class="btn btn-info btn-centro" id="GuardarPerfil">Guardar</button>
 				<button class="btn btn-success" id="masPerfil"> + </button>
 			</div>
 		</div>
+
 		<div class="panel panel-heading" id="modPerfil">
 			<div class="panel panel-heading">Selecciona un Perfil.</div>	
 			<div id= "formUser2" class="panel-body">
 				<label>Perfil:</label>
-				<div class="panel panel-success" id="panelSistemasPerfil2">  
-				<!-- <div class="panel panel-heading"><label>Seleccione el sistema al cual quiere modificar el perfil: </label></div> -->	
-				</div><br>
+				<div class="panel panel-success" id="panelSistemasPerfil2"></div><br>
+		
 				<div id="modulPorPerfiles" class="panel panel-info">
 					<div class="panel panel-heading">Modifica un Perfil.</div>
+				
+				<label>
 					<input type="text" id="newPerfilName" placeholder="Nuevo nombre"><br><br>
-					<div class="panel panel-heading">Modulos disponibles</div>
+				</label>
+					
+				<div class="panel panel-heading">Modulos disponibles</div>
 					<article class="panel-info" id="modulosDelPerfil"></article>
 				</div><br>
 				<button class="btn btn-info btn-centro" id="guardarCambiosPer">Aceptar</button>
 			</div>
 		</div>
 	</section>
-
 </body>
 </html>

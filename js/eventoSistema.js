@@ -26,24 +26,32 @@ var guardaSistema = function(){
 //Ejecutado al hacer click en algún modificar
 //Deberá mostrar la página de agrega Perfil pero con los datos de ese perfil
 var modificaPerfil = function(idPerfil){
-    nombrePerfil = PerfilesCreados[idPerfil][0];
-    modulosPerfil= PerfilesCreados[idPerfil][1];
     if(!confirm("¿Desea modificar el perfil?")){
         return;
     }
+    for(i=PerfilesCreados.length-1;i>=0;i--){
+        if(idPerfil==i){
+            perfilaModificar = PerfilesCreados.pop();
+            break;
+        }else{
+            arrayTemp.push(PerfilesCreados.pop());
+        }
+    }
+    var nombrePerfil = perfilaModificar[0];
+    var modulosPerfil= perfilaModificar[1];
     $("#SistemaPerfilName").val(nombrePerfil);
     var checkbox ="";
     var modulo = "";
     for(i=0;i<=controlModulos;i++){
         checkbox = "#checkbox"+i;
-        modulo = $(checkbox).val();  //Aquí hay un pedo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        console.log(modulo);         //Esta wea la imprime como Undefined
+        modulo = $(checkbox).val();
         if(modulosPerfil.includes(modulo)){
             $(checkbox).prop('checked', true);
         }else{
             $(checkbox).prop('checked', false);
         }
     }
+    modifica = true;
     $("#secSistema").slideUp("slow",)
     $("#panelAddPerfil").show("slow");
 }
@@ -80,7 +88,6 @@ var guardarPerfil = function(e){
         return;
     }
     var moduloSeleccionados = []
-    var perfilCreado = [];
     for(i=0;i<cantidadChbox;i++){
         var chkbox = "#checkbox"+i;
         if($(chkbox).prop("checked")){
@@ -91,22 +98,31 @@ var guardarPerfil = function(e){
         alert("Seleccione al menos un modulo.");
         return;
     }
+    var perfilCreado = [];
     perfilCreado.push(nombrePerfil);
     perfilCreado.push(moduloSeleccionados);
     PerfilesCreados.push(perfilCreado);
+    var tamañoArregloTemporal = arrayTemp.length;
+    for(i=0;i<tamañoArregloTemporal;i++){
+        PerfilesCreados.push(arrayTemp.pop());
+    }
     $("#panelAddPerfil").hide("slow");
     muestraPerfilGuardado();
-}
-
-//Ejecutada al hacer clic en el botón Guardar. Desahabilitada hasta que se agregue un perfil.
-//función para guardar el sistema, este solo debe funcionar ya que todo esté llenado
-var guardarSistema = function(){
 }
 
 //Ejecutada al hacer clic en el botón Regresa.
 //función para regresar de la sección de agregar perfil a la de sistema
 var regresaSistema = function(e){
     e.preventDefault();
+    if(modifica){
+        PerfilesCreados.push(perfilaModificar);
+        var tamañoTemporal = arrayTemp.length;
+        for(i=0;i<tamañoTemporal;i++){
+            PerfilesCreados.push(arrayTemp.pop());
+        }
+        modifica=false;
+    }
+    muestraPerfilGuardado();
     $("#secSistema").slideDown("slow");
     $("#panelAddPerfil").slideToggle("slow");
 }
@@ -130,7 +146,7 @@ var muestraFormPerfil = function(e){
         }else{
             insertaModulos(modulosDisp);
             $("#SistemaPerfilName").val("");
-            $("#headingPerfil").append(nombreSistema);
+            $("#headingPerfil").html("Agrega un perfil para: "+nombreSistema);
             $("#secSistema").slideUp("slow",)
             $("#panelAddPerfil").show("slow");
         }
@@ -141,6 +157,7 @@ var muestraFormPerfil = function(e){
 //recorre el Array obtenido en obtenModulo para crear Checkbox en la sección de AgregarPerfil
 var insertaModulos = function(modulDisponibles){
     var modulo ="";
+    cantidadChbox = 0;
     for(i=0;i<modulDisponibles.length;i++){
         modulo += "<div class='checkbox''>"+
         "<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+modulDisponibles[i]+"'><label>"+
@@ -184,6 +201,8 @@ var cargaPaginaSistema = function(){
     $("#panelAddPerfil").hide("slow");
 }
 
+var perfilaModificar;
+var arrayTemp = [];
 var modifica = false;
 var PerfilesCreados = [];
 var cantidadChbox = 0;
