@@ -26,8 +26,8 @@ header nav .btn-group{
 }
 #masModulo{
 	float: right;
-	margin-top: -50px;
-	margin-right: 50px;
+	margin-top: -320px;
+	margin-right: 10px;
 }
 .move{
 	margin-left: 20px;
@@ -52,5 +52,5 @@ header nav .btn-group{
 	width: 90%;
 }
 #PerfilABuscar{
-	width: 70%;
+	width: 70%; 
 }

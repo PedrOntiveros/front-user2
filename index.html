@@ -32,7 +32,7 @@
 	<!-- Seccion de usuario -->
 	<section id="secUsuario" class="panel panel-default">
 		<div class="panel panel-heading">Agrega un usuario.</div>
-		<form id= "panelFormulario" action="" class="panel-body">
+		<div id= "panelFormulario" action="" class="panel-body">
 			<div id="formUser">
 				<label>Usuario:</label> 		 <input class="form-control" type="text" id="userUsuario" placeholder="Usuario"><br>
 				<label>Password:</label> 		 <input class="form-control" type="password" id="userPass" placeholder="Contraseña"><br>
@@ -52,7 +52,7 @@
 				</article>
 			</div>
 			<br><button id="Guardar" class="btn btn-info btn-centro">Guardar</button>
-		<form>
+		<div>
 	</section>
 
 	<!-- Seccion de sistema -->
@@ -72,16 +72,16 @@
 				<div class="panel panel-info modoulos">
 					<div class="panel panel-heading">Modulos a integrar en el sistema:</div>
 					<article class="form" id="modulosDisponibles" style="height: 260px; overflow-y: scroll;">		
-						<div class="col-lg-6">
+						<div class="col-lg-6" id="panelmodulo0">
 							<div class="input-group">
 								<span class="input-group-btn">
-									<button class="btn btn-danger" type="button" id="btnEliminaModulo">-</button>
+									<button class="btn btn-danger" type="button" onclick="eliminaModulo(modulo0)">-</button>
 								</span>
 								<input type="text" class="form-control" id="modulo0" placeholder="Modulo">
 							</div>
 						</div>
 					</article>
-					<button class="btn btn-success" id="masModulo" onClick="agregaModulo">+</button>
+					<button class="btn btn-primary" id="masModulo" onClick="agregaModulo">+</button>
 				</div>
 			</div>
 		</div>
@@ -118,40 +118,35 @@
 			<button class="btn btn-info btn-centro" id="btnNuevoPerfil">Nuevo</button>
 			<button class="btn btn-warning " id="btnModificarPerfil">Modificar +</button>
 		</div>		
-
 		<div class="panel panel-heading" id="addPerfil">
-			<div class="panel panel-heading">Agrega un nuevo un perfil.</div>
+			<div class="panel panel-heading">Agrega un nuevo un perfil</div>
 			<div id= "formUser" class="panel-body">
 				<label>Perfil:</label>
 				<input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
 				<div class="panel panel-success" id="panelSistemasPerfil">
+					<!-- <div class="panel panel-heading"><label>Seleccione el sistema al que pertenecerá este perfil: </label></div> -->
 					<div id="modulPerfiles" class="panel panel-info">
 						<div class="panel panel-heading">Modulos disponibles</div>
 						<article class="panel-info" id="modulosDispPerf"></article>
 					</div><br>
 				</div><br>
 				<button class="btn btn-info btn-centro" id="GuardarPerfil">Guardar</button>
-				<button class="btn btn-success" id="masPerfil"> + </button>
 			</div>
 		</div>
-
 		<div class="panel panel-heading" id="modPerfil">
-			<div class="panel panel-heading">Selecciona un Perfil.</div>	
-			<div id= "formUser2" class="panel-body">
-				<label>Perfil:</label>
-				<div class="panel panel-success" id="panelSistemasPerfil2"></div><br>
-		
-				<div id="modulPorPerfiles" class="panel panel-info">
-					<div class="panel panel-heading">Modifica un Perfil.</div>
-				
-				<label>
-					<input type="text" id="newPerfilName" placeholder="Nuevo nombre"><br><br>
-				</label>
-					
-				<div class="panel panel-heading">Modulos disponibles</div>
+			<div id= "formUser2" class="panel-body"> 
+				<div class="panel panel-heading">Selecciona un Perfil:
+					<input type="text" list="comboSistPerfiles" id="comboPerfiles" placeholder="Perfil"></input>							
+				</div>
+				<!-- <select name="Perfiles" id="comboSistPerfiles" class="dropdown move"></select> -->
+				<datalist id="comboSistPerfiles" class="dropdown move"></datalist>
+				<div id="modulPorPerfiles" class="panel panel-info">		
+					<div class="panel panel-heading">Modulos disponibles</div>
 					<article class="panel-info" id="modulosDelPerfil"></article>
+					<div class="panel panel-heading">
+						<button class="btn btn-info btn-centro" id="guardarCambiosPer">Aceptar</button>
+					</div>
 				</div><br>
-				<button class="btn btn-info btn-centro" id="guardarCambiosPer">Aceptar</button>
 			</div>
 		</div>
 	</section>

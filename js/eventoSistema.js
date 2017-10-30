@@ -8,13 +8,66 @@ var inicia = function(){
     $("#PerfilABuscar").on("keyup",buscaPerfil);
 }
 
-var buscaPerfil = function(){
+var buscaPerfil = function(tecla){
     var likePerfil = $("#PerfilABuscar").val();
-    var perfilAChecarPerfilesCreados
-}
+    if("" == likePerfil || 8==tecla.keyCode){
+        var temp = perfilesGuardados.length;
+        for(i=temp;i>0;i--){
+            PerfilesCreados.push(perfilesGuardados.pop());
+        }
+        muestraPerfilGuardado();
+        return;
+    }
+    var numPerfil = PerfilesCreados.length;
+    var perfil;
+    for (i=numPerfil; i>0; i--){            //Cuando hago backspace no realiza la busqueda
+        perfil = PerfilesCreados.pop();
+        var nombrePerfil = perfil[0];
+        if(nombrePerfil.includes(likePerfil)){
+            perfilCoincide.push(perfil);
+        }
+        else{
+            perfilesGuardados.push(perfil);
+        }
+    }
+    numPerfil = perfilCoincide.length;
+    for(i=numPerfil;i>0;i--){
+        PerfilesCreados.push(perfilCoincide.pop());
+    }
+    muestraPerfilGuardado();
+ }
 
 //la mas importante
 //Aquí vamos a mandar toda la wea esa por ajax al endpoint
+
+var eliminaModulo = function(id){
+    var idText = $(id).attr("id");
+    var value = $(id).val();
+    var index;
+    for (i=0; i<PerfilesCreados.length;i++){
+        index = PerfilesCreados[i][1].indexOf(value);
+        if(-1==index){
+            continue;
+        }
+        else if(1==PerfilesCreados[i][1].length){
+            alert("El modulo que intenta eliminar es el único modulo de un perfil");
+            muestraPerfilGuardado();
+            return;
+        }
+        var modulos = PerfilesCreados[i][1];
+        console.log("modulos: "+modulos);
+        console.log("en la posicion: "+index);
+        console.log("entonces deberia elimirnar: "+modulos[index]);
+        modulos.splice(index,1);
+        console.log("asi queda: "+modulos)
+    }
+    $("#panel"+idText).remove();
+    modulosActuales--;
+    muestraPerfilGuardado();
+    //con el splice elimino el modulo
+    //y tengo que quitarlo de los modulos que lo tengan
+}
+
 var guardaSistema = function(){
     if(!confirm("¿Desea guardar el sistema?")){
         return;
@@ -45,6 +98,7 @@ var modificaPerfil = function(idPerfil){
     }
     var nombrePerfil = perfilaModificar[0];
     var modulosPerfil= perfilaModificar[1];
+    muestraFormPerfil();
     $("#SistemaPerfilName").val(nombrePerfil);
     var checkbox ="";
     var modulo = "";
@@ -66,6 +120,7 @@ var modificaPerfil = function(idPerfil){
 //Mostrará los datos del perfil que se guardó en la sección
 var muestraPerfilGuardado = function(){
     var htmlPerfil = "";
+    PerfilesCreados.sort();
     for(i=0; i<PerfilesCreados.length;i++){
         var perfili = PerfilesCreados[i].slice();
         var modPerfil = perfili.pop();
@@ -83,8 +138,7 @@ var muestraPerfilGuardado = function(){
 
 //Ejecutada al hacer clic en Guardar Perfil
 //obtiene los datos del perifil, y los guarda en un arreglo.
-var guardarPerfil = function(e){
-    e.preventDefault();
+var guardarPerfil = function(){
     if(!confirm("¿Esta seguro de quere guardar así las cosas?")){
         return;
     }
@@ -118,8 +172,7 @@ var guardarPerfil = function(e){
 
 //Ejecutada al hacer clic en el botón Regresa.
 //función para regresar de la sección de agregar perfil a la de sistema
-var regresaSistema = function(e){
-    e.preventDefault();
+var regresaSistema = function(){
     if(modifica){
         PerfilesCreados.push(perfilaModificar);
         var tamañoTemporal = arrayTemp.length;
@@ -135,8 +188,7 @@ var regresaSistema = function(e){
 
 //Ejecutada al hacer clic en el botón Agregar Perfil.
 //función para mostrar la sección de agregar el perfil para el sistema
-var muestraFormPerfil = function(e){
-    e.preventDefault();
+var muestraFormPerfil = function(){
     if(!confirm("¿Seguro que desea continuar?")){
         return;
     }else{
@@ -148,6 +200,10 @@ var muestraFormPerfil = function(e){
         var modulosDisp = obtenModulos();
         if(0 == modulosDisp.length){
             alert("Agrege al menos un modulo.");
+            return;
+        }
+        if(0 >= modulosActuales){
+            alert("No puede dejar el sistema sin modulos");
             return;
         }else{
             insertaModulos(modulosDisp);
@@ -188,7 +244,7 @@ var obtenModulos = function(){
     for(i=0;i<=controlModulos;i++){
         NumImputModulo ="#modulo"+i;
         temp = $(NumImputModulo).val();
-        if("" != temp){
+        if("" != temp && undefined != temp){
             arrayModulo.push(temp);
         }
     }
@@ -197,14 +253,14 @@ var obtenModulos = function(){
 
 //Ejecutada al hacer clic en el botón "+" en la sección de sistema.
 //agrega un campo más para un modulo
-var agregaModulo = function(e){
-    e.preventDefault();
+var agregaModulo = function(){
     controlModulos++;
+    modulosActuales ++;
     $("#modulosDisponibles").append(
-        "<div class='col-lg-6'>"+
-        "<div class='input-group'>"+
+        "<div class='col-lg-6' id='panelmodulo"+controlModulos+"'>"+
+        "<div class='input-group' style='margin-bottom:5px;'>"+
             "<span class='input-group-btn'>"+
-                "<button class='btn btn-danger' type='button' id='btnEliminaModulo'>-</button>"+
+                "<button class='btn btn-danger' type='button' onclick='eliminaModulo(modulo"+controlModulos+")'>-</button>"+
             "</span><input type='text' class='form-control' id='modulo"+controlModulos+
             "' placeholder='Modulo'></div></div>");
 }
@@ -220,8 +276,11 @@ var cargaPaginaSistema = function(){
 
 var perfilaModificar;
 var arrayTemp = [];
+var perfilesGuardados = [];
+var perfilCoincide = [];
 var modifica = false;
 var PerfilesCreados = [];
 var cantidadChbox = 0;
 var controlModulos = 0;
+var modulosActuales = 1;
 $(document).ready(inicia);
