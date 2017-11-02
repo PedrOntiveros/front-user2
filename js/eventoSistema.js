@@ -82,6 +82,14 @@ var guardaSistema = function(){
     alert("Sistema: "+nombre+"\nModulos: "+modulos+"\nPerfiles: "+perfiles);
 }
 
+var eliminaPerfil = function(idPerfil){
+    if(!confirm("¿Desea eliminar el perfil?")){
+        return;
+    }
+    PerfilesCreados.splice(idPerfil,1);
+    muestraPerfilGuardado();
+}
+
 //Ejecutado al hacer click en algún modificar
 //Deberá mostrar la página de agrega Perfil pero con los datos de ese perfil
 var modificaPerfil = function(idPerfil){
@@ -129,11 +137,17 @@ var muestraPerfilGuardado = function(){
                      "<b>Perfil: </b>"+nomPerfil+"<br>"+
                      "<b>Modulos: </b>"+modPerfil+"<br>"+
                      "<button class='btn btn-primary btn-xs' onclick=modificaPerfil("+i+")>Modifica</button>"+
+                     "<button class='btn btn-danger btn-xs' onclick=eliminaPerfil("+i+")>Borra</button>"+                     
                      "</div>";
     }
     $("#perfilesCreados").html(htmlPerfil);
     $("#secSistema").show("slow");
-    $("#guardarSistema").prop("disabled", false);
+    if(0<PerfilesCreados.length){
+        $("#guardarSistema").prop("disabled", false);
+    }
+    else{
+        $("#guardarSistema").prop("disabled", true);
+    }
 }
 
 //Ejecutada al hacer clic en Guardar Perfil

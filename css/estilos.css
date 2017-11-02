@@ -4,7 +4,7 @@ body{
 	max-width: 1024px;
 	margin: auto;
 }
-#modulPorPerfiles, #addBotones, #secSistema, #secUsuario, #panelAddPerfil, #secPerfil, #perfilesUser, #modulPerfiles, #addPerfil, #modPerfil, #infoPerfil,#addBotones{
+#secModulos,#modulPorPerfiles, #addBotones, #secSistema, #secUsuario, #panelAddPerfil, #secPerfil, #perfilesUser, #modulPerfiles, #addPerfil, #modPerfil, #infoPerfil,#addBotones{
 	display: none;
 }
 header nav .btn-group{

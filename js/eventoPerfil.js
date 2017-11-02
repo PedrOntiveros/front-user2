@@ -167,9 +167,7 @@ var muestraPerfiles = function(){
 		};
 
 		$("#comboSistPerfiles").html(perfiles);
-		
 		console.log(perfiles);
-
 	});
 
 	perfiles.fail(function(){
