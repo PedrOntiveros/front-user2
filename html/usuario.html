@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Seccion de usuario -->
+	<section id="secUsuario" class="panel panel-default">
+		<div class="panel panel-heading">Agrega un usuario.</div>
+		<div id= "panelFormulario" action="" class="panel-body">
+			<div id="formUser">
+				<label>Usuario:</label> 		 <input class="form-control" type="text" id="userUsuario" placeholder="Usuario"><br>
+				<label>Password:</label> 		 <input class="form-control" type="password" id="userPass" placeholder="Contraseña"><br>
+				<label>Nombre:</label> 		     <input class="form-control" type="text" id="userName" placeholder="Nombre"><br>
+				<label>Apellido Paterno:</label> <input class="form-control" type="text" id="userApePat" placeholder="Apellido Paterno"><br>
+				<label>Apellido Materno:</label> <input class="form-control" type="text" id="userApeMat" placeholder="Apellido Materno"><br>
+			</div>
+			<select name="Sistemas" id="comboSistU" class="dropdown move">
+			</select><br>
+
+			<div id="perfilesUser" class="panel panel-info">
+				<div id="perfilesDisp"class="panel panel-heading">Perfiles disponibles</div>
+				<!-- Label e Input de referencia -->
+
+				<article class="panel-info" id="perfilesDispUser">		
+					<!-- Aquí es donde debemos agregar de forma dinámica los perfiles  -->
+				</article>
+			</div>
+			<br><button id="Guardar" class="btn btn-info btn-centro">Guardar</button>
+		<div>
+	</section>
+</body>
+</html>

@@ -20,7 +20,6 @@ var iniciaApp = function(){
 		$("#modPerfil").show("slow");
 		$("#addPerfil").hide("slow");
 		muestraPerfiles();
-		//PerfilSeleccionado="";
 	});	
 
 	$("#btnPerfil").on("click",function(){
@@ -35,13 +34,9 @@ var iniciaApp = function(){
 		sistemas.done(function(data){
 
 			var option = "<option value='0'>Selecciona</option>"; 
-
 			for(i=0;i<data.length;i++){
-
 				option += "<option value='"+data[i].id+"' id='"+data[i].nombre+"' >"+data[i].nombre+"</option><br>"
-
 			}
-
 			$("#comboSistP").html(option);	  //Combo de sistemas para nuevo perfil	
 
 	});
@@ -257,9 +252,7 @@ var muestraModulos = function(){
 
 	//var Perfil = $(boton).val();
 	var sistema = $("#comboSistP").val();
-	var moduloSeparated;
 
-	//alert("ESTOY ENTRANDO AL MODULOPORPERFIL");
 
 	var modulos = $.ajax({
 		method: "GET",
@@ -295,7 +288,7 @@ var muestraModulos = function(){
 		alert("No se cargaron los MODULOS disponibles");
 	});
 }
-;
+
 var guardarPerfil = function(e){
 	e.preventDefault();
 
@@ -343,7 +336,6 @@ var cantidadChboxPorPerfil =0;
 var SistemasPerfil = [];
 var old_html;
 // var idSistema="";
-
 var PerfilSeleccionado="";
 var SistemaSeleccionado="";
 var idDelPerfil="";

@@ -9,11 +9,8 @@
 			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 			crossorigin="anonymous">
 	</script>
-	<script src="js/eventoPerfil.js"></script>
-	<script src="js/eventoSistema.js"></script>
-	<script src="js/eventoModulos.js"></script>
+	<script src="js/eventos.js"></script>
 </head>
-
 <body>
 	<header>
 		<nav class="navbar navbar-default">
@@ -30,132 +27,6 @@
 			</article>
 		</nav>
 	</header>
-	
-	<!-- Seccion de usuario -->
-	<section id="secUsuario" class="panel panel-default">
-		<div class="panel panel-heading">Agrega un usuario.</div>
-		<div id= "panelFormulario" action="" class="panel-body">
-			<div id="formUser">
-				<label>Usuario:</label> 		 <input class="form-control" type="text" id="userUsuario" placeholder="Usuario"><br>
-				<label>Password:</label> 		 <input class="form-control" type="password" id="userPass" placeholder="Contraseña"><br>
-				<label>Nombre:</label> 		     <input class="form-control" type="text" id="userName" placeholder="Nombre"><br>
-				<label>Apellido Paterno:</label> <input class="form-control" type="text" id="userApePat" placeholder="Apellido Paterno"><br>
-				<label>Apellido Materno:</label> <input class="form-control" type="text" id="userApeMat" placeholder="Apellido Materno"><br>
-			</div>
-			<select name="Sistemas" id="comboSistU" class="dropdown move">
-			</select><br>
-
-			<div id="perfilesUser" class="panel panel-info">
-				<div id="perfilesDisp"class="panel panel-heading">Perfiles disponibles</div>
-				<!-- Label e Input de referencia -->
-
-				<article class="panel-info" id="perfilesDispUser">		
-					<!-- Aquí es donde debemos agregar de forma dinámica los perfiles  -->
-				</article>
-			</div>
-			<br><button id="Guardar" class="btn btn-info btn-centro">Guardar</button>
-		<div>
-	</section>
-
-	<!-- Seccion de sistema -->
-	<section id="secSistema" class="panel panel-default">
-		<div class="panel panel-heading">Agrega un sistema.</div>
-		<div id="divPerfil" class="panel-body">
-			<label>Sistema:</label>
-			<input type="text" class="form-control" id="systemName" placeholder="Nombre del sistema"><br>
-			<div id="perfilesDispSistema" class="panel panel-info">
-				<div class="panel panel-heading">Perfiles:
-					<input type="text" name="perfilABuscar" id="PerfilABuscar" placeholder="Buscar">
-				</div>
-					<div id="perfilesCreados" style="height: 260px; overflow-y: scroll;">
-					</div>
-			</div>
-			<div id="divAddModulos"class="modoulus">
-				<div class="panel panel-info modoulos">
-					<div class="panel panel-heading">Modulos a integrar en el sistema:</div>
-					<article class="form" id="modulosDisponibles" style="height: 260px; overflow-y: scroll;">		
-						<div class="col-lg-6" id="panelmodulo0">
-							<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-danger" type="button" onclick="eliminaModulo(modulo0)">-</button>
-								</span>
-								<input type="text" class="form-control" id="modulo0" placeholder="Modulo">
-							</div>
-						</div>
-					</article>
-					<button class="btn btn-primary" id="masModulo" onClick="agregaModulo">+</button>
-				</div>
-			</div>
-		</div>
-		<div class="text-center">
-			<br><button id="agregaPerfil" class="btn btn-success">Agregar Perfil</button>
-			<button id="guardarSistema" class="btn btn-info" disabled>Guardar</button><br>
-		</div>
-	</section>
-	<div id="panelAddPerfil" class="panel panel-info">
-		<div id="headingPerfil" class="panel panel-heading"></div>
-		<div id= "formUser" class="panel-body">
-			<label>Perfil:</label> <input type="text" id="SistemaPerfilName" placeholder="Nombre del perfil"><br><br>
-			<div class="panel panel-" id="panelSistemasPerfil">
-				<div class="panel panesuccessl-heading">
-					<label>Seleccione los modulos a los que tendrá acceso el perfil:</label>
-				</div>
-				<article class="panel-body row" id="modulDisponibles">
-				</article>
-			</div>
-			<div class="text-center">
-				<button id="regresaSistema" class="btn btn-warning">Regresar</button>
-				<button id="guardaPS" class="btn btn-success">Guardar perfil</button>
-			</div>
-		</div>
-	</div>
-	<!-- ENDOF Seccion de sistema -->
-
-	<!-- Seccion de Perfil -->
-	<section id="secPerfil" class="panel panel-default">
-		<label> Seleccione un Sistema:</label>
-		<select name="Sistemas" id="comboSistP" class="dropdown move" >
-		</select><br>
-		<div class="panel panel-heading" id="addBotones">
-			<button class="btn btn-info btn-centro" id="btnNuevoPerfil">Nuevo</button>
-			<button class="btn btn-warning " id="btnModificarPerfil">Modificar +</button>
-		</div>		
-		<div class="panel panel-heading" id="addPerfil">
-			<div class="panel panel-heading">Agrega un nuevo un perfil</div>
-			<div id= "formUser" class="panel-body">
-				<label>Perfil:</label>
-				<input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
-				<div class="panel panel-success" id="panelSistemasPerfil">
-					<!-- <div class="panel panel-heading"><label>Seleccione el sistema al que pertenecerá este perfil: </label></div> -->
-					<div id="modulPerfiles" class="panel panel-info">
-						<div class="panel panel-heading">Modulos disponibles</div>
-						<article class="panel-info" id="modulosDispPerf"></article>
-					</div><br>
-				</div><br>
-				<button class="btn btn-info btn-centro" id="GuardarPerfil">Guardar</button>
-			</div>
-		</div>
-		<div class="panel panel-heading" id="modPerfil">
-			<div id= "formUser2" class="panel-body"> 
-				<div class="panel panel-heading">Selecciona un Perfil:
-					<input type="text" list="comboSistPerfiles" id="comboPerfiles" placeholder="Perfil"></input>							
-				</div>
-				<!-- <select name="Perfiles" id="comboSistPerfiles" class="dropdown move"></select> -->
-				<datalist id="comboSistPerfiles" class="dropdown move"></datalist>
-				<div id="modulPorPerfiles" class="panel panel-info">		
-					<div class="panel panel-heading">Modulos disponibles</div>
-					<article class="panel-info" id="modulosDelPerfil"></article>
-					<div class="panel panel-heading">
-						<button class="btn btn-info btn-centro" id="guardarCambiosPer">Aceptar</button>
-					</div>
-				</div><br>
-			</div>
-		</div>
-	</section>
-
-	<section id="secModulos" class="panel panel-default">
-		<label> Seleccione un Sistema:</label>
-		<select name="Sistemas" id="comboSistM" class="dropdown move" ></select><br>			
-	</section>
+	<div id="divContenido" class="recargar"></div>
 </body>
 </html>

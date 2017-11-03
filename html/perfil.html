@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/estilos.css">
+	<script	src="https://code.jquery.com/jquery-3.2.1.min.js"
+			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			crossorigin="anonymous">
+    </script>
+    <script src="js/eventoPerfil.js"></script>
+</head>
+<body>
+    <!-- Seccion de Perfil -->
+	<section id="secPerfil" class="panel panel-default">
+		<label> Seleccione un Sistema:</label>
+		<select name="Sistemas" id="comboSistP" class="dropdown move" 'class="form-control"'></select><br>
+		<div class="panel panel-heading" id="addBotones">
+			<button class="btn btn-info btn-centro" id="btnNuevoPerfil">Nuevo</button>
+			<button class="btn btn-warning " id="btnModificarPerfil">Modificar +</button>
+		</div>		
+		<!-- <div class="panel panel-heading" id="addPerfil"></div> -->
+		<div id="addPerfil">
+			<div id="agregarPerfil" class="addper">
+				<div class="panel panel-info addper">
+					<div class="panel panel-heading" >Agrega un nuevo un perfil</div>
+					<div id= "formPerfil" class="panel-body-heading center">
+						<label>Perfil:</label>
+						<input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
+						<div class="panel panel-success" id="panelSistemasPerfil">
+							<div id="modulPerfiles" class="panel panel-info">
+								<div class="panel panel-heading">Modulos disponibles</div>
+								<article class="panel-info" id="modulosDispPerf"></article>
+							</div><br>
+						</div><br>
+						<div class="text-center">
+							<button class="btn btn-info" id="GuardarPerfil">Guardar</button>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>	
+
+		<div id="modPerfil">
+			<div id= "formUser2" class="panel-body"> 
+				<div id="modificaPerfil" class="modper">
+					<div class="panel panel-info modper">
+						<div class="panel panel-heading" >Selecciona un Perfil:
+							<input type="text" list="comboSistPerfiles" id="comboPerfiles" placeholder="Perfil"></input>							
+						</div>
+						<datalist id="comboSistPerfiles" class="dropdown move"></datalist>
+						<!-- <input type="button" id="buscaPerfil" placeholder="Buscar" class="btn btn-success"></input> -->
+						<div id="modulPorPerfiles" class="panel panel-info">		
+							<div class="panel panel-heading">Modulos disponibles</div>
+							<article class="panel-info" id="modulosDelPerfil"></article>
+							<div class="panel panel-heading">
+								<button class="btn btn-info btn-centro" id="guardarCambiosPer">Aceptar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>	
+</body>
+</html>
