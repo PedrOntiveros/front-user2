@@ -1,17 +1,5 @@
 var direccionip = "http://34.214.94.231:8088/api/";
 
-//NOTAAAAAAAAAAAAAAAAAS
-//NOTAAAAAAAAAAAAAAAAAS
-//NOTAAAAAAAAAAAAAAAAAS
-//NOTAAAAAAAAAAAAAAAAAS
-//NOTAAAAAAAAAAAAAAAAAS
-//NOTAAAAAAAAAAAAAAAAAS
-//NOTAAAAAAAAAAAAAAAAAS
-//NOTAAAAAAAAAAAAAAAAAS
-
-//CHECA EL GUARDA MODULO 
-//Y EL MUESTRA MODULOS 
-
 var iniciaApp = function(){
     $("#btnModulos").on("click",function(){
         $("body section").hide();
@@ -68,14 +56,14 @@ var combosistemas = function(){
 
 var obtenModulos = function(){
     var idDelSistema = $("#comboSistM").val();
-    var mdoulosEnSistemas = $.ajax({
+    var modulosEnSistemas = $.ajax({
         method: "GET",
         headers: { 'Accept': 'application/json',
         'Content-Type': 'application/json'},
         url:direccionip+"sistemas/"+idDelSistema,
         dataType: "json"
     });
-    mdoulosEnSistemas.done(function(data){
+    modulosEnSistemas.done(function(data){
         console.log(data);
         if(null == data.modulos){
             alert("El sistema no tiene modulos, por favor agregue alguno");
@@ -89,13 +77,13 @@ var obtenModulos = function(){
                                 "<span class='input-group-btn'>"+
                                       "<button class='btn btn-danger' type='button' onclick='eliminaModulo(modulo"+i+")'>-</button>"+
                                 "</span><input type='text' class='form-control' id='modulo"+i+
-                                "' placeholder='Modulo' value='"+nombreModulo+"'></div></div>"; 
+                                "' placeholder='Modulo' value='"+nombreModulo+"' disabled></div></div>"; 
                 controlDeMOdulos++;
             }
             $("#modulosDisponibles").html(htmlDeModulos);
         }
     });
-    mdoulosEnSistemas.fail(function(data){
+    modulosEnSistemas.fail(function(data){
         alert("No cargaron los modulos");
     });
 }
@@ -113,9 +101,21 @@ var agregaModulo = function(){
 }
 
 var eliminaModulo = function(idModulo){
-    var moduloAEliminar = "panel"+$(idModulo).prop("id");
+    var moduloAEliminar = "#panel"+$(idModulo).prop("id");
     console.log(moduloAEliminar);
+    $(moduloAEliminar).remove();
+    controlDeMOdulos--;
 }
+
+var guardarModulos = function(){
+    
+
+
+
+}
+
+
+
 
 var controlDeMOdulos = 0;
 $(document).ready(iniciaApp);

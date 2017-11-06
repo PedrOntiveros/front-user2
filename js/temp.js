@@ -61,8 +61,7 @@ var eliminaModulo = function(id){
         modulos.splice(index,1);
         console.log("asi queda: "+modulos)
     }
-    $("#panel"+idText).remove();
-    modulosActuales--;
+    
     muestraPerfilGuardado();
     //con el splice elimino el modulo
     //y tengo que quitarlo de los modulos que lo tengan
