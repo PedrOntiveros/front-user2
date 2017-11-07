@@ -1,4 +1,6 @@
 var direccionip = "http://34.214.94.231:8088/api/";
+var direccionip2 = "http://192.168.10.103:8087/api/";
+ 
 
 var iniciaApp = function(){
 	$("#btnNuevoPerfil").on("click",function(e){
@@ -26,7 +28,7 @@ var iniciaApp = function(){
 			method: "GET",
 			headers: { 'Accept': 'application/json',
 			'Content-Type': 'application/json'},
-			url:direccionip+"sistemas",
+			url:direccionip2+"sistemas",
 			dataType: "json"
 		});
 		sistemas.done(function(data){
@@ -39,7 +41,9 @@ var iniciaApp = function(){
 
 		});
 		sistemas.fail(function(){
+
 			alert("No se cargaron los sistemas disponibles"); //MODIFICAR PARA QUE SE HAGA ESTE ALERT
+
 		});
 	
 		old_html = $("#panelSistemasPerfil").html();
@@ -66,11 +70,11 @@ var iniciaApp = function(){
 	$("#guardarCambiosPer").on("click",function(e){
 
 		e.preventDefault();
-
 		modificarPerfil();
-
 });
+
 }
+
 var muestraBotones = function(){
 	$("#addBotones").show("slow");
 	$("#modPerfil").hide("slow");
@@ -81,7 +85,7 @@ var muestraBotones = function(){
 var modificarPerfil = function(e){
 		
 	console.log(PerfilSeleccionado); 
-	var NuevoNombreDePerfil = $("#newPerfilName").val(); //Nuevo Nombre para el Perfil
+	var NuevoNombreDePerfil = $("#nuevonombre").val(); //Nuevo Nombre para el Perfil
 	var NombreSistema=comboSistP.options[comboSistP.selectedIndex].text; //Nombre del Sistema 
 	
 	if(PerfilSeleccionado==NuevoNombreDePerfil){
@@ -102,6 +106,7 @@ var modificarPerfil = function(e){
 		return;
 	}
 
+	//Aquí estan como string
 	var ModulosaEnviar = moduloSeleccionados.toString();
 
 }
@@ -111,7 +116,6 @@ var muestraPerfiles = function(){
 	var nombreSistema = comboSistP.options[comboSistP.selectedIndex].text; //Obtengo el nombre del "Option" seleccionado
 	//var perfilaBuscar=$("#perfilABuscar").val();
 	//console.log("El perfil que quieres ubscar es "+perfilaBuscar);
-
 
 	//console.log(sistema)
 	if("" == sistema || nombreSistema=="Selecciona"){
@@ -130,24 +134,6 @@ var muestraPerfiles = function(){
 	perfiles.done(function(data){
 		
 		var perfiles="";
-		//ESTO FUNCIONA PARA HACER LOS BOTONES
-		// for(i=0;i<data.perfiles.length;i++){		
-		// 	perfiles+= "<input type='button' id='boton"+i+"' onclick='muestraModuloPorPerfil(boton"+i+")' value='"+data.perfiles[i].nombre+"'>";		
-		// 	console.log(data.perfiles[i].nombre);
-		// }
-
-		//$("#panelSistemasPerfil2").html(perfiles);
-		//console.log("aqui ando");
-		//var perfiles = "<option value='0'>Selecciona</option>"; 
-		
-		//VERSION 2
-		// for(i=0;i<data.perfiles.length;i++){
-		// 	console.log("entre al for");
-		// 	perfiles += "<option value='"+data.perfiles[i].nombre+"' id='boton"+i+"'>"+data.perfiles[i].nombre+"</option><br>"
-		// 	console.log("estoyentrandoalfor");
-		// }
-
-		//VERSION 3
 		for(i=0;i<data.perfiles.length;i++){
 			console.log("entre al for");
 			perfiles += "<option value='"+data.perfiles[i].nombre+"' id='boton"+i+"'>"+data.perfiles[i].nombre+"</option><br>"
@@ -159,21 +145,16 @@ var muestraPerfiles = function(){
 	});
 
 	perfiles.fail(function(){
-		alert("No se cargaron los PERFILES disponibles WHY");
+		alert("No se cargaron los PERFILES disponibles");
 	});
 
 }
 
 var muestraModuloPorPerfil = function(){
-	//te mando el sistema y me regresa todos los perfiles que tiene ese sistema y por ende estan ahi todos los modulos
-	//DEBO MANDARLE EL ID UNICO DEL SISTEMA
 	
 	var Perfil=$("#comboPerfiles").val(); //NOMBRE DEL PERFIL
 
 	$("#nuevonombre").val(Perfil)
-
-	//var perfilaBuscar=$("#perfilABuscar").val();
-	//console.log("El perfil que quieres ubscar es "+perfilaBuscar);
 
 	var sistema = $("#comboSistP").val();
 	PerfilSeleccionado=Perfil;
@@ -181,6 +162,7 @@ var muestraModuloPorPerfil = function(){
 	$("#newPerfilName").val(Perfil);
 
 	var modulos = $.ajax({
+
 		method: "GET",
         headers: { 'Accept': 'application/json',
         'Content-Type': 'application/json'},
@@ -192,7 +174,14 @@ var muestraModuloPorPerfil = function(){
 		 var modulo="";
 		 var modulosdelperfil=[];
 		 var modulosdelsistema=[];
+		 var perfilesdelsistema=[];
 	
+		//Guardo los perfiles existentes
+		for(i=0;i<data.perfiles.length;i++){
+			perfilesdelsistema.push(data.perfiles[i].nombre);
+			console.log(data.perfiles[i].nombre);
+		}
+
 		//Guardo todos los modulos del sistema
 		for(i=0;i<data.modulos.length;i++){
 			modulosdelsistema.push(data.modulos[i].nombreModulo);
@@ -221,11 +210,16 @@ var muestraModuloPorPerfil = function(){
 			}
 
 		}
-		if(0==modulosdelsistema.length){
+		console.log(modulosdelsistema.length+"YOU PRINTED THIS");
+	
+		if(perfilesdelsistema.includes(Perfil)){
 			$("#modulosDelPerfil").html(modulo);
-			$("#modulPorPerfiles").show("slow");
+			$("#modulPorPerfiles").show("slow");	
 		}
-
+		else{
+			alert("El perfil que seleccionó no existe")
+			$("#modulPorPerfiles").hide("slow");
+		}
 	});
 	modulos.fail(function(){
 		alert("No se cargaron los MODULOS disponibles");
@@ -318,4 +312,6 @@ var PerfilSeleccionado="";
 var SistemaSeleccionado="";
 var idDelPerfil="";
 
+
 $(document).ready(iniciaApp);
+
