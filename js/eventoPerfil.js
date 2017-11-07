@@ -21,7 +21,6 @@ var iniciaApp = function(){
 		$("#addPerfil").hide("slow");
 		muestraPerfiles();
 	});	
-
 	$("#btnPerfil").on("click",function(){
 		var sistemas = $.ajax({
 			method: "GET",
@@ -30,7 +29,6 @@ var iniciaApp = function(){
 			url:direccionip+"sistemas",
 			dataType: "json"
 		});
-	
 		sistemas.done(function(data){
 
 			var option = "<option value='0'>Selecciona</option>"; 
@@ -39,8 +37,7 @@ var iniciaApp = function(){
 			}
 			$("#comboSistP").html(option);	  //Combo de sistemas para nuevo perfil	
 
-	});
-	
+		});
 		sistemas.fail(function(){
 			alert("No se cargaron los sistemas disponibles"); //MODIFICAR PARA QUE SE HAGA ESTE ALERT
 		});
@@ -55,20 +52,16 @@ var iniciaApp = function(){
 	//BOTON ENVIAR
 	//$("#btnEnviar").on("click",muestraModuloPorPerfil);
 	$("#comboPerfiles").on("keyup",function(tecla){
-		tecla.preventDefault();
 		if(tecla.keyCode==13){
-			muestraModuloPorPerfil(tecla);
+			muestraModuloPorPerfil();
 			return;
 		}
-		console.log("te saltaste el if");
-	//	muestraModuloPorPerfil();
+		//muestraModuloPorPerfil();
 		
 	});
 
-
 	$("#comboSistP").change(muestraBotones);
 	$("#comboSistPerfiles").change(muestraModuloPorPerfil);
-
 	$("#GuardarPerfil").on("click", guardarPerfil);
 	$("#guardarCambiosPer").on("click",function(e){
 
@@ -171,30 +164,21 @@ var muestraPerfiles = function(){
 
 }
 
-var muestraModuloPorPerfil = function(e){
-	e.preventDefault();
+var muestraModuloPorPerfil = function(){
 	//te mando el sistema y me regresa todos los perfiles que tiene ese sistema y por ende estan ahi todos los modulos
 	//DEBO MANDARLE EL ID UNICO DEL SISTEMA
-
-	//var Perfil = $(boton).val(); //ESTO ESTABA ANTES QUE LA LINEA DE ABAJO VERSION 1
-	//var Perfil = comboSistPerfiles.options[comboSistPerfiles.selectedIndex].text; //VERSION 2
-	//var Perfil=$("#perfilABuscar").val(); //VERSION 3
 	
 	var Perfil=$("#comboPerfiles").val(); //NOMBRE DEL PERFIL
+
+	$("#nuevonombre").val(Perfil)
 
 	//var perfilaBuscar=$("#perfilABuscar").val();
 	//console.log("El perfil que quieres ubscar es "+perfilaBuscar);
 
 	var sistema = $("#comboSistP").val();
-	var moduloSeparated;
-
 	PerfilSeleccionado=Perfil;
 
-	//var chekeados=[];
-	//console.log(sistema);
-
 	$("#newPerfilName").val(Perfil);
-	//alert("ESTOY ENTRANDO AL MODULOPORPERFIL");
 
 	var modulos = $.ajax({
 		method: "GET",
@@ -205,7 +189,6 @@ var muestraModuloPorPerfil = function(e){
 	});	
 
 	modulos.done(function(data){
-
 		 var modulo="";
 		 var modulosdelperfil=[];
 		 var modulosdelsistema=[];
@@ -238,9 +221,10 @@ var muestraModuloPorPerfil = function(e){
 			}
 
 		}
-
-		 $("#modulosDelPerfil").html(modulo);
-		 $("#modulPorPerfiles").show("slow");
+		if(0==modulosdelsistema.length){
+			$("#modulosDelPerfil").html(modulo);
+			$("#modulPorPerfiles").show("slow");
+		}
 
 	});
 	modulos.fail(function(){
@@ -252,8 +236,6 @@ var muestraModulos = function(){
 
 	//var Perfil = $(boton).val();
 	var sistema = $("#comboSistP").val();
-
-
 	var modulos = $.ajax({
 		method: "GET",
         headers: { 'Accept': 'application/json',
@@ -261,19 +243,15 @@ var muestraModulos = function(){
         url:direccionip+"/sistemas/"+sistema,
         dataType: "json"
 	});	
-
 	modulos.done(function(data){
-
 		//var moduloSeparated = data.modulosSitema.split(",");
 		var modulo="";
-		
 		for(i=0;i<data.modulos.length;i++){
 			console.log("llegue aqui "+data.modulos[i].nombreModulo);
 			modulo += "<div class='checkbox''><label>"+
 					"<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+data.modulos[i].nombreModulo+"'>"+
 					data.modulos[i].nombreModulo+"</label></div>";
-		}		
-
+		}
 		// for(i=0;i<moduloSeparated.length;i++){
 		// 	modulo += "<div class='checkbox''><label>"+
 		// 			"<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+moduloSeparated[i]+"'>"+

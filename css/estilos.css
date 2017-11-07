@@ -11,6 +11,11 @@ header nav .btn-group{
 	margin: auto;
 	padding: 10px;
 }
+#modificarModulo{
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+}
 #sistemasCrear{
 	width: 80%;
 	margin: auto;
@@ -25,8 +30,7 @@ header nav .btn-group{
 	width: 70%;
 }
 #masModulo{
-	float: right;
-	margin-bottom: 10px;
+	margin-left: 95%;
 }
 .move{
 	margin-left: 20px;

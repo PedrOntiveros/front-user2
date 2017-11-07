@@ -8,7 +8,6 @@ var iniciaApp = function(){
     });
 
     $("#comboSistM").change(function(){
-        console.log("Deberías quitar todo y el otro combo resetearlo")
         $("#opciones").prop('selectedIndex',0);
         $("#agregarModuloASistema").hide("slow");
         $("#modificarModulo").hide("slow");
@@ -17,21 +16,20 @@ var iniciaApp = function(){
 
     $("#ComboOpMOD").change(function(){
         var opcomboSistM = $("#ComboOpMOD").val();
-        console.log(opcomboSistM);
         if(opcomboSistM =="op1"){
-            obtenModulos();
             $("#agregarModuloASistema").show("slow");
             $("#modificarModulo").hide("slow");
         }else if(opcomboSistM=="op3"){
-            $("#modificarModulo").show("slow");        
-            $("#agregarModuloASistema").hide("slow");
-            
-        }else{
+            obtenModulos();            
+         }else{
             $("#agregarModuloASistema").hide("slow");
             $("#modificarModulo").hide("slow");
             alert("Seleccione una opción");
         }
     });
+    $("#guardaModulosAgregados").on('click',guardarModulos)
+
+    $("#guardaMod").on("click",guardaredicion);
 }
 
 var combosistemas = function(){
@@ -64,9 +62,9 @@ var obtenModulos = function(){
         dataType: "json"
     });
     modulosEnSistemas.done(function(data){
-        console.log(data);
         if(null == data.modulos){
             alert("El sistema no tiene modulos, por favor agregue alguno");
+            return;
         }else{
             var cantidadModulos = data.modulos.length;
             var htmlDeModulos = "";
@@ -75,12 +73,14 @@ var obtenModulos = function(){
                 htmlDeModulos+= "<div class='col-lg-6' id='panelmodulo"+i+"'>"+
                                 "<div class='input-group' style='margin-bottom:5px;'>"+
                                 "<span class='input-group-btn'>"+
-                                      "<button class='btn btn-danger' type='button' onclick='eliminaModulo(modulo"+i+")'>-</button>"+
+                                      "<button class='btn btn-success' type='button' onclick='edita(modulo"+i+")'>Editar</button>"+
                                 "</span><input type='text' class='form-control' id='modulo"+i+
                                 "' placeholder='Modulo' value='"+nombreModulo+"' disabled></div></div>"; 
-                controlDeMOdulos++;
+                modulosExistentes++;
             }
-            $("#modulosDisponibles").html(htmlDeModulos);
+            $("#modulosDelSistema").html(htmlDeModulos);
+            $("#modificarModulo").show("slow");        
+            $("#agregarModuloASistema").hide("slow");
         }
     });
     modulosEnSistemas.fail(function(data){
@@ -88,34 +88,68 @@ var obtenModulos = function(){
     });
 }
 
+var edita = function(modulo){
+    console.log(modulo);
+    $(modulo).prop('disabled',false);
+}
+
 var agregaModulo = function(){   
-    var htmlDeModulos = "<div class='col-lg-6' id='panelmodulo"+controlDeMOdulos+"'>"+
+    var htmlDeModulos = "<div class='col-lg-6' id='panelmodulo"+contadorDeModulos+"'>"+
                     "<div class='input-group' style='margin-bottom:5px;'>"+
                     "<span class='input-group-btn'>"+
-                        "<button class='btn btn-danger' type='button' onclick='eliminaModulo(modulo"+controlDeMOdulos+")'>-</button>"+
-                    "</span><input type='text' class='form-control' id='modulo"+i+
+                        "<button class='btn btn-danger' type='button' onclick='eliminaModulo(modulo"+contadorDeModulos+")'>-</button>"+
+                    "</span><input type='text' class='form-control' id='modulo"+contadorDeModulos+
                     "' placeholder='Modulo'></div></div>"; 
-    console.log(htmlDeModulos);
-    controlDeMOdulos++;
-    $("#modulosDisponibles").append(htmlDeModulos);
+    contadorDeModulos++;
+    controlDeModulos++;
+    $("#artAddModulosAlSistem").append(htmlDeModulos);
 }
 
 var eliminaModulo = function(idModulo){
     var moduloAEliminar = "#panel"+$(idModulo).prop("id");
-    console.log(moduloAEliminar);
+    controlDeModulos--;
     $(moduloAEliminar).remove();
-    controlDeMOdulos--;
 }
 
 var guardarModulos = function(){
-    
+    var modulosEnSistema = [];
+    for(i=0;i<contadorDeModulos;i++){
+        var modulo = "#modulo"+i;
+        var nombreModulo =$(modulo).val();
+        if(undefined == nombreModulo){
+            continue;
+        }else if("" == nombreModulo){
+            continue;
+        }else{
+            modulosEnSistema.push(nombreModulo)
+        } 
+    }
+    if(0==modulosEnSistema.length){
+        alert("We agrega minimo un modulo, de paro.");
+        return;
+    }
+    //aquí va lo del post
+    console.log(modulosEnSistema)
+}
 
+var guardaredicion = function(){
+    var moduloseditados =[];
+    for(i=0; i<modulosExistentes;i++){
+        var modulo = "#modulo"+i;
+        var nombreModulo =$(modulo).val();
+        if(undefined == nombreModulo){
+            continue;
+        }else if("" == nombreModulo){
+            continue;
+        }else{
+            moduloseditados.push(nombreModulo)
+        } 
+    }
 
 
 }
 
-
-
-
-var controlDeMOdulos = 0;
+var modulosExistentes = 0;
+var controlDeModulos = 1;
+var contadorDeModulos = 1;
 $(document).ready(iniciaApp);
