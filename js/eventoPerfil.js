@@ -1,6 +1,4 @@
-var direccionip = "http://34.214.94.231:8088/api/";
-var direccionip2 = "http://192.168.10.103:8087/api/";
- 
+var direccionIp = "http://192.168.10.103:8087/api/";
 
 var iniciaApp = function(){
 	$("#btnNuevoPerfil").on("click",function(e){
@@ -28,7 +26,7 @@ var iniciaApp = function(){
 			method: "GET",
 			headers: { 'Accept': 'application/json',
 			'Content-Type': 'application/json'},
-			url:direccionip2+"sistemas",
+			url:direccionIp+"sistemas",
 			dataType: "json"
 		});
 		sistemas.done(function(data){
@@ -127,7 +125,7 @@ var muestraPerfiles = function(){
 		method: "GET",
         headers: { 'Accept': 'application/json',
         'Content-Type': 'application/json'},
-        url:direccionip+"/sistemas/"+sistema,
+        url:direccionIp+"/sistemas/"+sistema,
         dataType: "json"
 	});
 
@@ -162,11 +160,10 @@ var muestraModuloPorPerfil = function(){
 	$("#newPerfilName").val(Perfil);
 
 	var modulos = $.ajax({
-
 		method: "GET",
         headers: { 'Accept': 'application/json',
         'Content-Type': 'application/json'},
-        url:direccionip+"/sistemas/"+sistema,
+        url:direccionIp+"/sistemas/"+sistema,
         dataType: "json"
 	});	
 
@@ -234,17 +231,17 @@ var muestraModulos = function(){
 		method: "GET",
         headers: { 'Accept': 'application/json',
         'Content-Type': 'application/json'},
-        url:direccionip+"/sistemas/"+sistema,
+        url:direccionIp2+"modulos/"+sistema,
         dataType: "json"
 	});	
 	modulos.done(function(data){
 		//var moduloSeparated = data.modulosSitema.split(",");
 		var modulo="";
-		for(i=0;i<data.modulos.length;i++){
-			console.log("llegue aqui "+data.modulos[i].nombreModulo);
+		for(i=0;i<data.length;i++){
+			console.log("llegue aqui "+data[i].nombreModulo);
 			modulo += "<div class='checkbox''><label>"+
-					"<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+data.modulos[i].nombreModulo+"'>"+
-					data.modulos[i].nombreModulo+"</label></div>";
+					"<input type='checkbox' id='checkbox"+(cantidadChbox++)+"' value='"+data[i].nombreModulo+"'>"+
+					data[i].nombreModulo+"</label></div>";
 		}
 		// for(i=0;i<moduloSeparated.length;i++){
 		// 	modulo += "<div class='checkbox''><label>"+

@@ -21,7 +21,7 @@ var guardaSistema = function(){
             method: "POST",
             headers: { 'Accept': 'application/json',
             'Content-Type': 'application/json'},
-            url:direcionIp+"sistemas",data,
+            url: direcionIp+"sistemas",data,
             dataType: "json"
         });
         sistemas.done(function(data){
@@ -35,5 +35,5 @@ var guardaSistema = function(){
     } 
 }     
 
-var direcionIp = "http://192.168.10.103:8087/api/"
+var direcionIp = "http://192.168.10.103:8087/api/";
 $(document).ready(inicia);
