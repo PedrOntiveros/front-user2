@@ -4,7 +4,10 @@ body{
 	max-width: 1024px;
 	margin: auto;
 }
-#opciones,#modificaUnModulo, #modificarModulo,#secModificaSistema,#secNuevoSistema, #crearModulo,#agregarModuloASistema,#modulPorPerfiles, #addBotones, #panelAddPerfil, #perfilesUser, #modulPerfiles, #addPerfil, #modPerfil, #infoPerfil,#addBotones{
+#opciones,#modificaUnModulo, #modificaSistema, #modificarModulo,
+#secModificaSistema,#secNuevoSistema, #crearModulo,#agregarModuloASistema,
+#modulPorPerfiles, #addBotones, #panelAddPerfil, #perfilesUser, #modulPerfiles,
+#addPerfil, #modPerfil, #infoPerfil,#addBotones, #secEliminaSistema{
 	display: none;
 }
 .panel-size{

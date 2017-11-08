@@ -14,8 +14,11 @@
 </head>
 <body>
 	<div class="text-center">
-		<button class="btn btn-info btn-centro" id="btnNuevoSistema">Nuevo</button>
-		<button class="btn btn-warning " id="btnModificarPerfil">Modificar +</button>
+		<div class="btn-group">
+			<button class="btn btn-info" id="btnNuevoSistema">Nuevo</button>
+			<button class="btn btn-warning" id="btnModificaSistema">Modificar +</button>
+			<button class="btn btn-danger" id="btnEliminaSistema">Elimina</button>
+		</div>
 	</div>
     <!-- Seccion de sistema -->
 	<div id="secNuevoSistema" class="panel panel-default panel-size">
@@ -31,21 +34,32 @@
 	
 	<div id="secModificaSistema" class="panel-default panel panel-size">
 		<div class="panel panel-success">		
-			<div class="panel panel-heading">Sistemas disponibles</div>
-			<div class="panel panel-body" id="sistemasDisponiblles">
+			<div class="panel panel-heading">Sistemas disponibles: 
+				<input type="text" id="buscarSistema">
+			</div>
+			<div class="panel panel-body" id="sistemasDisponibles1">
 			</div>
 		</div>		
 	</div>
 
-	<div id="modificaUnModulo">
-			<div class="panel panel-info">
-				<div class="panel-heading panel">Modulo a editar</div>
-				<div class="text-center">
-					<input type="text" class="control-form" id="moduloACambiar">
-				</div>
-				<div class="text-center"><button id="regresarAModificar" class="btn btn-warning btn-center ">Regresar</button>
-					<button id="guardaMod" class="btn btn-success btn-center ">Guardar Modulo</button></div>
+	<div id="modificaSistema" class="panel panel-info panel-size">
+		<div class="panel-heading panel">Sistema a editar</div>
+			<div class="panel panel-body text-center">
+				<input type="text" class="control-form" id="nombreSistemaCambiar">
+				<button id="regresaAModificar" class="btn btn-warning btn-center ">Regresar</button>
+				<button id="GuardaSistMod" class="btn btn-success btn-center ">Modificar Sistema</button>
 			</div>
 		</div>
+	</div>
+
+	<div id="secEliminaSistema" class="panel panel-danger panel-size">
+		<div class="panel panel-success">		
+			<div class="panel panel-heading">Sistemas disponibles: 
+				<input type="text" id="buscarSistema">
+			</div>
+			<div class="panel panel-body" id="sistemasDisponibles2">
+			</div>
+		</div>	
+	</div>
 </body>
 </html>

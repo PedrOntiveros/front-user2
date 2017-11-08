@@ -1,4 +1,4 @@
-var direccionIp2 = "http://192.168.10.103:8087/api/";
+var direccionIp2 = "http://192.168.1.56:8087/api/";
 
 var iniciaApp = function(){
     $("#btnModulos").on("click",function(){
@@ -33,7 +33,6 @@ var iniciaApp = function(){
     $("#regresarAModificar").on('click',function(){
         $("#modificaUnModulo").hide("slow");
         obtenModulos();
-
     })
 }
 
@@ -76,6 +75,8 @@ var guardarModulos = function(){
         });
         modulos.done(function(data){
             alert("Se registró correctamente");
+            $("#moduloagregar").val("");
+            $("#moduloagregar").focus();     
         });
         modulos.fail(function(data){
             alert("Falló");
@@ -131,6 +132,7 @@ var edita = function(modulo){
     $("#modificarModulo").hide();
     $("#agregarModuloASistema").hide();
     $("#modificaUnModulo").show("slow");
+    $("#moduloACambiar").focus();  
 }
 
 var eliminaModulo = function(idModulo){

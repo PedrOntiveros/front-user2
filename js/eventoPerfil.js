@@ -1,5 +1,4 @@
-var direccionIp = "http://192.168.10.103:8087/api/";
-
+var direccionIp =  "http://192.168.1.56:8087/api/";
 var iniciaApp = function(){
 	$("#btnNuevoPerfil").on("click",function(e){
 		e.preventDefault();
@@ -149,7 +148,6 @@ var muestraPerfiles = function(){
 }
 
 var muestraModuloPorPerfil = function(){
-	
 	var Perfil=$("#comboPerfiles").val(); //NOMBRE DEL PERFIL
 
 	$("#nuevonombre").val(Perfil)
