@@ -16,32 +16,39 @@
 <body>
     <!-- Seccion de Perfil -->
 	<section id="secPerfil" class="panel panel-default">
-		<label> Seleccione un Sistema:</label>
-		<select name="Sistemas" id="comboSistP" class="dropdown move form-control"></select><br>
 		<div class="panel panel-heading" id="addBotones">
 			<button class="btn btn-info btn-centro" id="btnNuevoPerfil">Nuevo</button>
 			<button class="btn btn-warning " id="btnModificarPerfil">Modificar +</button>
-		</div>		
-		<!-- <div class="panel panel-heading" id="addPerfil"></div> -->
-		<div id="addPerfil">
-			<div id="agregarPerfil" class="addper">
-				<div class="panel panel-info addper">
-					<div class="panel panel-heading" >Agrega un nuevo un perfil</div>
-					<div id= "formPerfil" class="panel-body-heading center">
-						<label>Perfil:</label>
-						<input type="text" id="perfilName" placeholder="Nombre del perfil"><br><br>
-						<div class="panel panel-success" id="panelSistemasPerfil">
-							<div id="modulPerfiles" class="panel panel-info">
-								<div class="panel panel-heading">Modulos disponibles</div>
-								<article class="panel-info" id="modulosDispPerf"></article>
-							</div><br>
-						</div><br>
-						<div class="text-center">
-							<button class="btn btn-info" id="GuardarPerfil">Guardar</button>
-						</div>
-					</div>
-				</div>
+		</div>
+		
+		<div class="panel panel-heading" id="elPerfil" >Agrega un nuevo un perfil
+			<div id= "formPerfil" class="panel-body">
+				<label>Perfil:</label>
+				<input type="text" id="perfilName" placeholder="Nombre del perfil"><br>
 			</div>	
+		</div>	
+
+		<div id="seleccionasistema">
+			<label> Seleccione un Sistema:</label>
+			<select name="Sistemas" id="comboSistP" class="dropdown move form-control"></select>
+		</div>	
+
+		<!-- <div class="panel panel-heading" id="addPerfil"></div> -->
+		<div class="panel panel-info" id="addPerfil">
+			<div class="panel panel-heading" >Agrega un nuevo un perfil</div>
+			<div id= "formPerfil" class="panel-body">
+				<label>Perfil:</label>
+				<input type="text" id="perfilName" placeholder="Nombre del perfil"><br>
+				<div id="modulPerfiles" class="panel panel-info">
+					<div class="panel panel-heading">Modulos disponibles</div>
+						<article class="panel-body" id="modulosDispPerf"></article>
+				</div>
+			</div>
+				<div class="text-center">
+					<button class="btn btn-info" id="GuardarPerfil">Guardar</button>
+					<button class="btn btn-success" id="otroPerfil">+</button>
+				</div>
+		</div>	
 		</div>	
 
 		<div id="modPerfil">

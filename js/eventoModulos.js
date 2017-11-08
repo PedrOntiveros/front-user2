@@ -79,7 +79,7 @@ var guardarModulos = function(){
             $("#moduloagregar").focus();     
         });
         modulos.fail(function(data){
-            alert("Falló");
+            alert("Falló: "+data.JSON);
         });
     }  else{
         console.log('nel');
