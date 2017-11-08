@@ -24,26 +24,30 @@
 			</select>
 		</article>	
 		
-		<div id="agregarModuloASistema">
-			<div id="divAddModulos"class="modoulus">
-				<div class="panel panel-info modoulos">
+		<div id="agregarModuloASistema" class="panel-size">
+			<div id="divAddModulos">
+				<div class="panel panel-info">
 					<div class="panel panel-heading">Modulos en el sistema:</div>
-					<div class='col-lg-6' id='panelmodulo0'>
-						<div class='input-group' style='margin-bottom:5px;'>
-							<input type='text' class='form-control' id='moduloagregar' placeholder='Modulo'>
+					<div class="panel-body">
+						<div class='col-lg-6' id='panelmodulo0'>
+							<div class='input-group' style='margin-bottom:5px;'>
+								<input type='text' class='form-control' id='moduloagregar' placeholder='Modulo'>
+							</div>
+							<button class="btn btn-primary" id="guardaModulosAgregados">Guardar</button>
 						</div>
-						<button class="btn btn-primary" id="guardaModulosAgregados">Guardar</button>
 					</div>
 				</div>
 			</div>
 		</div>	
 			
 		<!-- Acá tiene que se la parte de modificar un modulo (solo el nombre) -->
-		<div id="modificarModulo">
+		<div id="modificarModulo" class="panel-size">
 			<div id="modModulo">
 				<div class="panel panel-info">		
 					<div class="panel panel-heading">Modulos disponibles</div>
-					<article class="panel panel-default" id="modulosDelSistema"></article>
+					<div class="panel-body">
+						<article class="panel" id="modulosDelSistema"></article>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -54,7 +58,8 @@
 				<div class="text-center">
 					<input type="text" class="control-form" id="moduloACambiar">
 				</div>
-				<div class="text-center"><button id="guardaMod" class="btn btn-success btn-center ">Guardar Modulo</button></div>
+				<div class="text-center"><button id="regresarAModificar" class="btn btn-warning btn-center ">Regresar</button>
+					<button id="guardaMod" class="btn btn-success btn-center ">Guardar Modulo</button></div>
 			</div>
 		</div>
 

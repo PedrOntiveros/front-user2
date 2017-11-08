@@ -4,17 +4,17 @@ body{
 	max-width: 1024px;
 	margin: auto;
 }
-#opciones,#modificaUnModulo, #modificarModulo, #crearModulo,#agregarModuloASistema,#modulPorPerfiles, #addBotones, #panelAddPerfil, #perfilesUser, #modulPerfiles, #addPerfil, #modPerfil, #infoPerfil,#addBotones{
+#opciones,#modificaUnModulo, #modificarModulo,#secModificaSistema,#secNuevoSistema, #crearModulo,#agregarModuloASistema,#modulPorPerfiles, #addBotones, #panelAddPerfil, #perfilesUser, #modulPerfiles, #addPerfil, #modPerfil, #infoPerfil,#addBotones{
 	display: none;
+}
+.panel-size{
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
 }
 header nav .btn-group{
 	margin: auto;
 	padding: 10px;
-}
-#modificarModulo{
-	width: 90%;
-	margin: auto;
-	margin-top: 20px;
 }
 #sistemasCrear{
 	width: 80%;
@@ -48,7 +48,6 @@ header nav .btn-group{
 	float: right;
 }
 #divPerfil{
-
 	width: 90%;
 }
 #PerfilABuscar{

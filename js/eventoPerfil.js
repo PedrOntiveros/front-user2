@@ -163,7 +163,7 @@ var muestraModuloPorPerfil = function(){
 		method: "GET",
         headers: { 'Accept': 'application/json',
         'Content-Type': 'application/json'},
-        url:direccionIp+"/sistemas/"+sistema,
+        url:direccionIp+"perfiles",
         dataType: "json"
 	});	
 
@@ -231,8 +231,8 @@ var muestraModulos = function(){
 		method: "GET",
         headers: { 'Accept': 'application/json',
         'Content-Type': 'application/json'},
-        url:direccionIp2+"modulos/"+sistema,
-        dataType: "json"
+		url:direccionIp+"modulos/"+sistema,
+	    dataType: "json"
 	});	
 	modulos.done(function(data){
 		//var moduloSeparated = data.modulosSitema.split(",");
@@ -263,6 +263,7 @@ var guardarPerfil = function(e){
 
 	var NuevoPerfil = $("#perfilName").val();
 	var Sistema = comboSistP.options[comboSistP.selectedIndex].text;
+	var idSistema=$("#comboSistP").val();
 	var Modulos="";
 	console.log(NuevoPerfil);
 
@@ -272,6 +273,7 @@ var guardarPerfil = function(e){
 	}
 
 	var moduloSeleccionados=[];
+
 	for(i=0;i<cantidadChbox;i++){
 		var chkbox = "#checkbox"+i;
 		if($(chkbox).prop("checked")){
@@ -280,6 +282,19 @@ var guardarPerfil = function(e){
 	}
 	//console.log(moduloSeleccionados);
 	Modulos = moduloSeleccionados.toString();
+
+	// var Mods =  JSON.stringify(moduloSeleccionados); //["uno","dos"] 
+	// alert(Mods);
+
+	var jsonObj = {};
+	var xd=[];
+	
+	for (i = 0; i<moduloSeleccionados.length;i++) {
+	 xd[i]=  [jsonObj['nombreModulo'] = moduloSeleccionados[i]];
+	};
+	
+	console.log(xd);
+
 	//console.log(Modulos);
 
 	if(""==Modulos){
@@ -287,15 +302,41 @@ var guardarPerfil = function(e){
 		return;
 	}	
 
-	var parametros = "nombre="+NuevoPerfil+
-					 "&nombreSistema="+Sistema+
-					 "&modulosSistemas="+Modulos;						
+	//nombre
+	//nombreSistema
+	//modulos
 
-	//COMO LE MANDO LAS COSAS ?
+ 	//	[{nombreModulo = "uno" },{nombreModulo = "dos"}]
 
-	// var parametros = "nombre="+nombrePerfil+
-    // 				 "&sistemas="+SistemasPerfil; //COMO MANDAR UN ARRAY POR AJAX COMO PARAMETRO
-	// peticionAjax(parametros,"");
+    if(NuevoPerfil != ''){    
+        let data = JSON.stringify({
+            nombre : NuevoPerfil,
+			nombreSistema: Sistema,
+			modulos: moduloSeleccionados
+        });
+        console.log("datos a mandar: "+data)
+        var perfiles = $.ajax({
+            method: "POST",
+            headers: { 'Accept': 'application/json',
+            'Content-Type': 'application/json'},
+            url: direccionIp+"perfiles",data,
+			dataType: "json",
+
+        });
+        perfiles.done(function(data){
+            alert("Se registró correctamente");
+        });
+        perfiles.fail(function(data){
+            alert(data.responseJSON.message);
+        });
+    }  else{
+        console.log('nel');
+    } 
+
+
+
+
+	
 }
 
 //Este es variable para llevar un conteo de los modulos que se agregan al sistema
@@ -311,4 +352,3 @@ var idDelPerfil="";
 
 
 $(document).ready(iniciaApp);
-

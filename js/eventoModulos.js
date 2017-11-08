@@ -8,27 +8,33 @@ var iniciaApp = function(){
     });
 
     $("#comboSistM").change(function(){
-        $("#opciones").prop('selectedIndex',0);
+        $("select#ComboOpMOD").attr('selectedIndex', 0);
         $("#agregarModuloASistema").hide("slow");
         $("#modificarModulo").hide("slow");
+        $("#modificaUnModulo").hide("slow");
         $("#opciones").show("slow");
     })
 
     $("#ComboOpMOD").change(function(){
+        $("#modificaUnModulo").hide("slow");
+        $("#modificarModulo").hide("slow");
+        $("#agregarModuloASistema").hide("slow");
         var opcomboSistM = $("#ComboOpMOD").val();
         if(opcomboSistM =="op1"){
             $("#agregarModuloASistema").show("slow");
-            $("#modificarModulo").hide("slow");
         }else if(opcomboSistM=="op3"){
-            obtenModulos();            
+            obtenModulos();           
          }else{
-            $("#agregarModuloASistema").hide("slow");
-            $("#modificarModulo").hide("slow");
             alert("Seleccione una opción");
         }
     });
     $("#guardaModulosAgregados").on('click',guardarModulos)
     $("#guardaMod").on("click",guardaredicion);
+    $("#regresarAModificar").on('click',function(){
+        $("#modificaUnModulo").hide("slow");
+        obtenModulos();
+
+    })
 }
 
 var combosistemas = function(){
@@ -92,40 +98,35 @@ var obtenModulos = function(){
         dataType: "json"
     });
     modulosEnSistemas.done(function(data){
-        if(null == data){
+        console.log(data);
+        if(null == data || 0 == data.length){
             alert("El sistema no tiene modulos, por favor agregue alguno");
             return;
         }else{
             var cantidadModulos = data.length;
             var htmlDeModulos = "";
             for(i=0;i<cantidadModulos;i++){
-                var datos =[];
-                datos.push("modulo"+i);
-                datos.push(data[i].id)
+                var idModulo =  data[i].id;
                 var nombreModulo = data[i].nombreModulo;
                 htmlDeModulos+= "<div class='col-lg-6' id='panelmodulo"+i+"'>"+
                                 "<div class='input-group' style='margin-bottom:5px;'>"+
                                 "<span class='input-group-btn'>"+
-                                      "<button class='btn btn-success' type='button' onclick='edita("+datos+");'>Editar</button>"+
-                                "</span><input type='text' class='form-control' id='modulo"+i+
-                                "' placeholder='Modulo' value='"+nombreModulo+"' disabled></div></div>"; 
+                                      "<button class='btn btn-success' type='button' onclick='edita(\""+idModulo+"\");'>Editar</button>"+
+                                "</span><input type='text' class='form-control' id='"+idModulo+"'"+
+                                "placeholder='Modulo' value='"+nombreModulo+"' disabled></div></div>"; 
             }
             $("#modulosDelSistema").html(htmlDeModulos);
             $("#modificarModulo").show("slow");
-            $("#agregarModuloASistema").hide("slow");
         }
-    });                                      "<button class='btn btn-success' type='button' onclick='edita(modulo"+i+"\',\'"+data+"\');'>Editar</button>"+
-    
-    modulosEnSistemas.fail(function(data){
+    });      
+    modulosEnSistemas.fail(function(damcnDelta){
         alert("No cargaron los modulos");
     });
 }
 
-var edita = function(datos){
-    var nombreModulo = $(datos[0]).val();
-    console.log(nombreModulo+"asdf");
-    idModuloActual = datos[1];
-    console.log(idModuloActual);
+var edita = function(modulo){
+    var nombreModulo = $("#"+modulo).val();
+    idModuloActual = $("#"+modulo).prop("id")
     $("#moduloACambiar").val(nombreModulo);
     $("#modificarModulo").hide();
     $("#agregarModuloASistema").hide();
@@ -138,11 +139,12 @@ var eliminaModulo = function(idModulo){
 }
 
 var guardaredicion = function(){
-    var idSistema = $("#comboSistM").val();
     var moduloACambiar =$("#moduloACambiar").val();
+    var idDelSistema = $("#comboSistM").val();
     if(moduloACambiar != ''){    
         let data = JSON.stringify({
             id : idModuloActual,
+            idSistema : idDelSistema,
             nombreModulo: moduloACambiar
         });
         console.log("datos a mandar: "+data)
@@ -150,20 +152,22 @@ var guardaredicion = function(){
             method: "PUT",
             headers: { 'Accept': 'application/json',
             'Content-Type': 'application/json'},
-            url: direccionIp2+"modulos/",data,
-            dataType: "json"
+            url: direccionIp2+"modulos/",data
         });
-        modulos.done(function(data){
+        modulos.done(function(){
             alert("Se registró correctamente");
+            $("#modificaUnModulo").hide("slow");
+            obtenModulos();
         });
-        modulos.fail(function(data){
+        modulos.fail(function(){
+            console.log(status);
             alert("Falló");
         });
     }  else{
         console.log('nel');
-    } 
+    }
+    
 }
 
-var idModulos = [];
 var idModuloActual="";
 $(document).ready(iniciaApp);

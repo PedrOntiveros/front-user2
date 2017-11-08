@@ -18,7 +18,7 @@
 		<button class="btn btn-warning " id="btnModificarPerfil">Modificar +</button>
 	</div>
     <!-- Seccion de sistema -->
-	<div id="secSistema" class="panel panel-default">
+	<div id="secNuevoSistema" class="panel panel-default panel-size">
 		<div class="panel panel-heading">Agrega un sistema.</div>
 		<div id="divPerfil" class="panel-body">
 			<label>Sistema:</label>
@@ -27,6 +27,25 @@
 		<div class="text-center">
 			<button id="guardarSistema" class="btn btn-info">Guardar</button><br>
 		</div>
-    </div>
+	</div>
+	
+	<div id="secModificaSistema" class="panel-default panel panel-size">
+		<div class="panel panel-success">		
+			<div class="panel panel-heading">Sistemas disponibles</div>
+			<div class="panel panel-body" id="sistemasDisponiblles">
+			</div>
+		</div>		
+	</div>
+
+	<div id="modificaUnModulo">
+			<div class="panel panel-info">
+				<div class="panel-heading panel">Modulo a editar</div>
+				<div class="text-center">
+					<input type="text" class="control-form" id="moduloACambiar">
+				</div>
+				<div class="text-center"><button id="regresarAModificar" class="btn btn-warning btn-center ">Regresar</button>
+					<button id="guardaMod" class="btn btn-success btn-center ">Guardar Modulo</button></div>
+			</div>
+		</div>
 </body>
 </html>
